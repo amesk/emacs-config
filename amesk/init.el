@@ -51,6 +51,9 @@
 (global-set-key (kbd "C-E") ' ecb-toggle-proc)
 (global-set-key (kbd "C-x C-k") ' kill-this-buffer)
 
+(require 'maxframe)
+(add-hook 'window-setup-hook 'maximize-frame t)
+
 ;; 
 ;; ecb-eshell-recenter
 ;; ecb-eshell-buffer-sync
