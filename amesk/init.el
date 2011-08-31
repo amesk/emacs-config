@@ -38,6 +38,7 @@
 (pc-selection-mode)
 
 (setq compile-command "cd ${PWD%/src/*} && ./hammer build")
+(setq compilation-scroll-output t) 
 (setq is-ecb-active nil)
 
 (defun ecb-toggle-proc ()
