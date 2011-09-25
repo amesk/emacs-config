@@ -1,9 +1,9 @@
 ;; Amesk patches
 
-(load-file "~/emacs/cedet-1.0/common/cedet.el")
-(global-ede-mode 1)                      ; Enable the Project management system
-(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion 
-(global-srecode-minor-mode 1)            ; Enable template insertion menu
+;;(load-file "~/emacs/cedet-1.0/common/cedet.el")
+;;(global-ede-mode 1)                      ; Enable the Project management system
+;;(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion 
+;;(global-srecode-minor-mode 1)            ; Enable template insertion menu
 
 (add-to-list 'load-path "~/emacs/ecb-2.40")
 (require 'ecb-autoloads)
@@ -14,25 +14,25 @@
 
 (add-hook 'ecb-activate-hook  'my-ecb-activate-hook)
 
+;;;;(ede-cpp-root-project "UniNav"
+;;;;                :name "UniNav Project"
+;;;;                :file "~/uninav/CMakeLists.txt"
+;;;;                :include-path '("/"
+;;;;                                "/src"
+;;;;                               )
+;;;;                :system-include-path '("~/exp/include")
+;;;;                :spp-table '(("isUnix" . "")
+;;;;                             ("BOOST_TEST_DYN_LINK" . "")))
+
+
 ;;(ede-cpp-root-project "UniNav"
+;;
 ;;                :name "UniNav Project"
 ;;                :file "~/uninav/CMakeLists.txt"
 ;;                :include-path '("/"
-;;                                "/src"
+;;                                "/src/public"
 ;;                               )
-;;                :system-include-path '("~/exp/include")
-;;                :spp-table '(("isUnix" . "")
-;;                             ("BOOST_TEST_DYN_LINK" . "")))
-
-
-(ede-cpp-root-project "UniNav"
-
-                :name "UniNav Project"
-                :file "~/uninav/CMakeLists.txt"
-                :include-path '("/"
-                                "/src/public"
-                               )
-                :system-include-path '("~/include"))
+;;                :system-include-path '("~/include"))
 
 
 (pc-selection-mode)
@@ -50,9 +50,16 @@
 (global-set-key (kbd "C-B") ' recompile)
 (global-set-key (kbd "C-E") ' ecb-toggle-proc)
 (global-set-key (kbd "C-x C-k") ' kill-this-buffer)
+(global-set-key (kbd "C-<kp-home>") ' beginning-of-buffer)
+(global-set-key (kbd "C-<kp-end>") ' end-of-buffer)
 
 (require 'maxframe)
 (add-hook 'window-setup-hook 'maximize-frame t)
+
+(require 'blank-mode)
+(require 'google-c-style)
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
 
 ;; 
 ;; ecb-eshell-recenter
