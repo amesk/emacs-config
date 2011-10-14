@@ -1,6 +1,6 @@
 ;; Amesk patches
 
-;;(load-file "~/emacs/cedet-1.0/common/cedet.el")
+(load-file "~/emacs/cedet-1.0/common/cedet.el")
 ;;(global-ede-mode 1)                      ; Enable the Project management system
 ;;(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion 
 ;;(global-srecode-minor-mode 1)            ; Enable template insertion menu
@@ -48,15 +48,14 @@
     ((lambda () (setq is-ecb-active t) (ecb-activate)))))
 
 (global-set-key (kbd "C-B") ' recompile)
-(global-set-key (kbd "C-E") ' ecb-toggle-proc)
+(global-set-key (kbd "C-x e") ' ecb-toggle-proc)
 (global-set-key (kbd "C-x C-k") ' kill-this-buffer)
 (global-set-key (kbd "C-<kp-home>") ' beginning-of-buffer)
 (global-set-key (kbd "C-<kp-end>") ' end-of-buffer)
 
-(require 'maxframe)
-(add-hook 'window-setup-hook 'maximize-frame t)
+;;(require 'maxframe)
+;;(add-hook 'window-setup-hook 'maximize-frame t)
 
-(require 'blank-mode)
 (require 'google-c-style)
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
@@ -65,5 +64,12 @@
 ;; ecb-eshell-recenter
 ;; ecb-eshell-buffer-sync
 
+(setq path-to-ctags "/usr/bin/ctags-exuberant") ;; <- your ctags path here
+(defun create-tags (dir-name)
+  "Create tags file."
+  (interactive "DDirectory: ")
+  (shell-command
+    (format "%s -f %s/TAGS -e -R %s" path-to-ctags dir-name (directory-file-name dir-name)))
+  )
 
 ;;; init.el ends here
