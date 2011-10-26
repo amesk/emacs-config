@@ -35,7 +35,7 @@
 ;;                :system-include-path '("~/include"))
 
 
-(pc-selection-mode)
+;;(pc-selection-mode)
 
 (setq compile-command "cd ${PWD%/src/*} && ./hammer build")
 (setq compilation-scroll-output t) 
@@ -71,5 +71,20 @@
   (shell-command
     (format "%s -f %s/TAGS -e -R %s" path-to-ctags dir-name (directory-file-name dir-name)))
   )
+
+(setq path-to-cpplint "/home/amesk/bin/cpplint")
+(defun cpplint ()
+  "Invokes cpplint on current buffer"
+  (interactive)
+  (get-buffer-create "*cpplint*")
+  (shell-command
+   (format "%s %s" path-to-cpplint  buffer-file-name)
+   "*cpplint*" "*cpplint*")
+  (switch-to-buffer "*cpplint*")
+  (compilation-mode)
+  )
+(global-set-key (kbd "C-x C-g") ' cpplint)
+
+(global-set-key [(C tab)] 'buffer-menu)
 
 ;;; init.el ends here
