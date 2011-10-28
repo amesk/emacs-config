@@ -52,6 +52,7 @@
 (global-set-key (kbd "C-x C-k") ' kill-this-buffer)
 (global-set-key (kbd "C-<kp-home>") ' beginning-of-buffer)
 (global-set-key (kbd "C-<kp-end>") ' end-of-buffer)
+(global-set-key [(C tab)] 'buffer-menu)
 
 ;;(require 'maxframe)
 ;;(add-hook 'window-setup-hook 'maximize-frame t)
@@ -73,18 +74,31 @@
   )
 
 (setq path-to-cpplint "/home/amesk/bin/cpplint")
+(setq path-to-dcpplint "/home/amesk/bin/dcpplint")
+(setq cpplint-buffer-name "*cpplint*")
+
 (defun cpplint ()
-  "Invokes cpplint on current buffer"
+  "Invokes cpplint on a current buffer"
   (interactive)
-  (get-buffer-create "*cpplint*")
+  (get-buffer-create cpplint-buffer-name)
   (shell-command
    (format "%s %s" path-to-cpplint  buffer-file-name)
-   "*cpplint*" "*cpplint*")
-  (switch-to-buffer "*cpplint*")
+   cpplint-buffer-name cpplint-buffer-name)
+  (switch-to-buffer cpplint-buffer-name)
   (compilation-mode)
   )
 (global-set-key (kbd "C-x C-g") ' cpplint)
 
-(global-set-key [(C tab)] 'buffer-menu)
+(defun dcpplint (dir-name)
+  "Invokes cpplint on a current buffer"
+  (interactive "DDirectory: ")
+  (get-buffer-create cpplint-buffer-name)
+  (shell-command
+   (format "%s %s" path-to-dcpplint dir-name)
+   cpplint-buffer-name cpplint-buffer-name)
+  (switch-to-buffer cpplint-buffer-name)
+  (compilation-mode)
+  )
+(global-set-key (kbd "C-x M-g") ' dcpplint)
 
 ;;; init.el ends here
