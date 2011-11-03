@@ -53,6 +53,8 @@
 (global-set-key (kbd "C-<kp-home>") ' beginning-of-buffer)
 (global-set-key (kbd "C-<kp-end>") ' end-of-buffer)
 (global-set-key [(C tab)] 'buffer-menu)
+(global-set-key (kbd "M-g") 'goto-line)
+
 
 ;;(require 'maxframe)
 ;;(add-hook 'window-setup-hook 'maximize-frame t)
@@ -100,5 +102,13 @@
   (compilation-mode)
   )
 (global-set-key (kbd "C-x M-g") ' dcpplint)
+
+(defun beautify_cpp ()
+  "Invokes C++ beautifier on a current buffer"
+  (interactive)
+  (shell-command
+   (format "%s %s" "~/bin/beautify_cpp"  buffer-file-name))
+   (load-file  buffer-file-name)
+  )
 
 ;;; init.el ends here
