@@ -2,7 +2,7 @@
 
 (load-file "~/emacs/cedet-1.0/common/cedet.el")
 ;;(global-ede-mode 1)                      ; Enable the Project management system
-;;(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion 
+;;(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
 ;;(global-srecode-minor-mode 1)            ; Enable template insertion menu
 
 (add-to-list 'load-path "~/emacs/ecb-2.40")
@@ -38,7 +38,7 @@
 ;;(pc-selection-mode)
 
 (setq compile-command "cd ${PWD%/src/*} && ./hammer build")
-(setq compilation-scroll-output t) 
+(setq compilation-scroll-output t)
 (setq is-ecb-active nil)
 
 (defun ecb-toggle-proc ()
@@ -47,7 +47,7 @@
       ((lambda () (setq is-ecb-active nil) (ecb-deactivate)))
     ((lambda () (setq is-ecb-active t) (ecb-activate)))))
 
-(global-set-key (kbd "C-B") ' recompile)
+(global-set-key (kbd "<f7>") ' recompile)
 (global-set-key (kbd "C-x e") ' ecb-toggle-proc)
 (global-set-key (kbd "C-x C-k") ' kill-this-buffer)
 (global-set-key (kbd "C-<kp-home>") ' beginning-of-buffer)
@@ -63,7 +63,7 @@
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
 
-;; 
+;;
 ;; ecb-eshell-recenter
 ;; ecb-eshell-buffer-sync
 
@@ -109,6 +109,27 @@
   (shell-command
    (format "%s %s" "~/bin/beautify_cpp"  buffer-file-name))
    (load-file  buffer-file-name)
-  )
+   )
+
+; make whitespace-mode use just basic coloring
+(setq whitespace-style (quote
+                        ( spaces tabs newline space-mark tab-mark newline-mark)))
+
+;; make whitespace-mode use “¶” for newline and “▷” for tab.
+;; together with the rest of its defaults
+(setq whitespace-display-mappings
+ '(
+   (space-mark 32 [183] [46]) ; normal space, ·
+   (space-mark 160 [164] [95])
+   (space-mark 2208 [2212] [95])
+   (space-mark 2336 [2340] [95])
+   (space-mark 3616 [3620] [95])
+   (space-mark 3872 [3876] [95])
+   (newline-mark 10 [182 10]) ; newlne, ¶
+   (tab-mark 9 [9655 9] [92 9]) ; tab, ▷
+))
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(setq column-number-mode t)
 
 ;;; init.el ends here
