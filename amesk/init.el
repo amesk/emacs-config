@@ -136,4 +136,56 @@
 (setq split-height-threshold 0)
 (setq split-width-threshold nil)
 
+;; People say that this mess up ECB
+;;
+;; (defadvice split-window (after move-point-to-new-window activate)
+;;  "Moves the point to the newly created window after splitting."
+;;  (other-window 1))
+
+(global-set-key "\C-x2" (lambda () (interactive)(split-window-vertically) (other-window 1)))
+(global-set-key "\C-x3" (lambda () (interactive)(split-window-horizontally) (other-window 1)))
+
+;;
+;; Resize window (recursive-version)
+;;
+;; (defun v-resize (key)
+;;  "interactively resize the window"
+;;  (interactive "cHit +/- to enlarge/shrink")
+;;    (cond
+;;      ((eq key (string-to-char "+"))
+;;         (enlarge-window 1)
+;;         (call-interactively 'v-resize))
+;;      ((eq key (string-to-char "-"))
+;;         (enlarge-window -1)
+;;         (call-interactively 'v-resize))
+;;      (t (push key unread-command-events))))
+;; (global-set-key "\C-c+" 'v-resize)
+
+;;
+;; Resize window interactively
+;;
+(defvar enlarge-window-char ?+)
+(defvar shrink-window-char ?-)
+(defun resize-window (&optional arg)
+  "Interactively resize the selected window.
+  Repeatedly prompt whether to enlarge or shrink the window until the
+  response is neither `enlarge-window-char' or `shrink-window-char'.
+  When called with a prefix arg, resize the window by ARG lines."
+  (interactive "p")
+  (let ((prompt (format "Enlarge/Shrink window (%c/%c)? "
+                        enlarge-window-char shrink-window-char))
+        response)
+    (while (progn
+             (setq response (read-event prompt))
+             (cond ((equal response enlarge-window-char)
+                    (enlarge-window arg)
+                    t)
+                   ((equal response shrink-window-char)
+                    (enlarge-window (- arg))
+                    t)
+                   (t nil))))
+    (push response unread-command-events)))
+
+(global-set-key (kbd "C-x w") 'resize-window)
+
 ;;; init.el ends here
