@@ -188,4 +188,6 @@
 
 (global-set-key (kbd "C-x w") 'resize-window)
 
+(load-file '"~/.emacs.d/amesk/cmake-mode.el")
+
 ;;; init.el ends here
