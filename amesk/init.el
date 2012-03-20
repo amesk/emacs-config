@@ -190,7 +190,10 @@
 
 (load-file '"~/.emacs.d/amesk/cmake-mode.el")
 
-(setq uninav-page-script "~/projects/uninav-page-muse/uninav-page-muse.el")
+;; (setq uninav-page-muse-base "~/projects/uninav-page-muse")
+(setq uninav-page-muse-base "E:/Projects/uninav-page-muse")
+
+(setq uninav-page-script (concat uninav-page-muse-base "/uninav-page-muse.el"))
 (if (file-exists-p uninav-page-script) (load-file uninav-page-script) )
 
 ;;; init.el ends here
