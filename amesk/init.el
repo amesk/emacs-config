@@ -59,10 +59,6 @@
 ;;(require 'maxframe)
 ;;(add-hook 'window-setup-hook 'maximize-frame t)
 
-(require 'google-c-style)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
-(add-hook 'c-mode-common-hook 'google-make-newline-indent)
-
 ;;
 ;; ecb-eshell-recenter
 ;; ecb-eshell-buffer-sync
@@ -111,23 +107,7 @@
    (load-file  buffer-file-name)
    )
 
-; make whitespace-mode use just basic coloring
-(setq whitespace-style (quote
-                        ( spaces tabs newline space-mark tab-mark newline-mark)))
 
-;; make whitespace-mode use “¶” for newline and “▷” for tab.
-;; together with the rest of its defaults
-(setq whitespace-display-mappings
- '(
-   (space-mark 32 [183] [46]) ; normal space, ·
-   (space-mark 160 [164] [95])
-   (space-mark 2208 [2212] [95])
-   (space-mark 2336 [2340] [95])
-   (space-mark 3616 [3620] [95])
-   (space-mark 3872 [3876] [95])
-   (newline-mark 10 [182 10]) ; newlne, ¶
-   (tab-mark 9 [9655 9] [92 9]) ; tab, ▷
-))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (setq column-number-mode t)
@@ -188,12 +168,74 @@
 
 (global-set-key (kbd "C-x w") 'resize-window)
 
-(load-file '"~/.emacs.d/amesk/cmake-mode.el")
+(require 'cmake-mode)
 
 ;; (setq uninav-page-muse-base "~/projects/uninav-page-muse")
 (setq uninav-page-muse-base "E:/Projects/uninav-page-muse")
 
 (setq uninav-page-script (concat uninav-page-muse-base "/uninav-page-muse.el"))
 (if (file-exists-p uninav-page-script) (load-file uninav-page-script) )
+
+;;
+;; Commands problem solving in russian mode (turned on from the system)
+;;
+
+(defun reverse-input-method (input-method)
+  "Build the reverse mapping of single letters from INPUT-METHOD."
+  (interactive
+   (list (read-input-method-name "Use input method (default current): ")))
+  (if (and input-method (symbolp input-method))
+      (setq input-method (symbol-name input-method)))
+  (let ((current current-input-method)
+        (modifiers '(nil (control) (meta) (control meta))))
+    (when input-method
+      (activate-input-method input-method))
+    (when (and current-input-method quail-keyboard-layout)
+      (dolist (map (cdr (quail-map)))
+        (let* ((to (car map))
+               (from (quail-get-translation
+                      (cadr map) (char-to-string to) 1)))
+          (when (and (characterp from) (characterp to))
+            (dolist (mod modifiers)
+              (define-key (if mod input-decode-map local-function-key-map)
+                (vector (append mod (list from)))
+                (vector (append mod (list to)))))))))
+    (when input-method
+      (activate-input-method current))))
+
+
+(defadvice read-passwd (around my-read-passwd act)
+  (let ((local-function-key-map nil))
+    ad-do-it))
+
+(reverse-input-method 'russian-computer)
+
+(require 'fill-column-indicator)
+(require 'google-c-style)
+
+(defun customize-cpp ()
+  "Customize C++ coding style & visualization options"
+  (setq whitespace-style '(faces tabs tab-mark lines-tail))
+  (setq whitespace-line-column 81)
+  ;; make whitespace-mode use “¶” for newline and “▷” for tab.
+  ;; together with the rest of its defaults
+  (setq whitespace-display-mappings
+        '(
+          (space-mark 32 [183] [46]) ; normal space, ·
+          (space-mark 160 [164] [95])
+          (space-mark 2208 [2212] [95])
+          (space-mark 2336 [2340] [95])
+          (space-mark 3616 [3620] [95])
+          (space-mark 3872 [3876] [95])
+          (newline-mark 10 [182 10]) ; newlne, ¶
+          (tab-mark 9 [9655 9] [92 9]) ; tab, ▷
+          ))
+  (setq fill-column 81)
+  (fci-mode)
+  (whitespace-mode)
+  (google-set-c-style)
+  (google-make-newline-indent))
+
+(add-hook 'c-mode-common-hook 'customize-cpp)
 
 ;;; init.el ends here
