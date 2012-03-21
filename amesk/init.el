@@ -1,241 +1,41 @@
 ;; Amesk patches
 
-(load-file "~/emacs/cedet-1.0/common/cedet.el")
-;;(global-ede-mode 1)                      ; Enable the Project management system
-;;(semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
-;;(global-srecode-minor-mode 1)            ; Enable template insertion menu
-
-(add-to-list 'load-path "~/emacs/ecb-2.40")
-(require 'ecb-autoloads)
-
-(defun my-ecb-activate-hook ()
-  (setq ecb-tip-of-the-day nil)
-  (global-semantic-tag-folding-mode))
-
-(add-hook 'ecb-activate-hook  'my-ecb-activate-hook)
-
-;;;;(ede-cpp-root-project "UniNav"
-;;;;                :name "UniNav Project"
-;;;;                :file "~/uninav/CMakeLists.txt"
-;;;;                :include-path '("/"
-;;;;                                "/src"
-;;;;                               )
-;;;;                :system-include-path '("~/exp/include")
-;;;;                :spp-table '(("isUnix" . "")
-;;;;                             ("BOOST_TEST_DYN_LINK" . "")))
-
-
-;;(ede-cpp-root-project "UniNav"
-;;
-;;                :name "UniNav Project"
-;;                :file "~/uninav/CMakeLists.txt"
-;;                :include-path '("/"
-;;                                "/src/public"
-;;                               )
-;;                :system-include-path '("~/include"))
-
-
-;;(pc-selection-mode)
+(defun amesk/get-short-hostname ()
+  (let* ((sys-name (system-name))
+         (idx (string-match "\\." sys-name)))
+    (if idx
+        (substring sys-name 0 idx)
+      sys-name)))
 
 (setq compile-command "cd ${PWD%/src/*} && ./hammer build")
 (setq compilation-scroll-output t)
-(setq is-ecb-active nil)
-
-(defun ecb-toggle-proc ()
-  (interactive)
-  (if is-ecb-active
-      ((lambda () (setq is-ecb-active nil) (ecb-deactivate)))
-    ((lambda () (setq is-ecb-active t) (ecb-activate)))))
-
-(global-set-key (kbd "<f7>") ' recompile)
-(global-set-key (kbd "C-x e") ' ecb-toggle-proc)
-(global-set-key (kbd "C-x C-k") ' kill-this-buffer)
-(global-set-key (kbd "C-<kp-home>") ' beginning-of-buffer)
-(global-set-key (kbd "C-<kp-end>") ' end-of-buffer)
-(global-set-key [(C tab)] 'buffer-menu)
-(global-set-key (kbd "M-g") 'goto-line)
-
-
-;;(require 'maxframe)
-;;(add-hook 'window-setup-hook 'maximize-frame t)
-
-;;
-;; ecb-eshell-recenter
-;; ecb-eshell-buffer-sync
-
-(setq path-to-ctags "/usr/bin/ctags-exuberant") ;; <- your ctags path here
-(defun create-tags (dir-name)
-  "Create tags file."
-  (interactive "DDirectory: ")
-  (shell-command
-    (format "%s -f %s/TAGS -e -R %s" path-to-ctags dir-name (directory-file-name dir-name)))
-  )
-
-(setq path-to-cpplint "/home/amesk/bin/cpplint")
-(setq path-to-dcpplint "/home/amesk/bin/dcpplint")
-(setq cpplint-buffer-name "*cpplint*")
-
-(defun cpplint ()
-  "Invokes cpplint on a current buffer"
-  (interactive)
-  (get-buffer-create cpplint-buffer-name)
-  (shell-command
-   (format "%s %s" path-to-cpplint  buffer-file-name)
-   cpplint-buffer-name cpplint-buffer-name)
-  (switch-to-buffer cpplint-buffer-name)
-  (compilation-mode)
-  )
-(global-set-key (kbd "C-x C-g") ' cpplint)
-
-(defun dcpplint (dir-name)
-  "Invokes cpplint on a current buffer"
-  (interactive "DDirectory: ")
-  (get-buffer-create cpplint-buffer-name)
-  (shell-command
-   (format "%s %s" path-to-dcpplint dir-name)
-   cpplint-buffer-name cpplint-buffer-name)
-  (switch-to-buffer cpplint-buffer-name)
-  (compilation-mode)
-  )
-(global-set-key (kbd "C-x M-g") ' dcpplint)
-
-(defun beautify_cpp ()
-  "Invokes C++ beautifier on a current buffer"
-  (interactive)
-  (shell-command
-   (format "%s %s" "~/bin/beautify_cpp"  buffer-file-name))
-   (load-file  buffer-file-name)
-   )
-
-
-
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (setq column-number-mode t)
-
 ;; compile window splits always vertically
 (setq split-height-threshold 0)
 (setq split-width-threshold nil)
 
-;; People say that this mess up ECB
-;;
-;; (defadvice split-window (after move-point-to-new-window activate)
-;;  "Moves the point to the newly created window after splitting."
-;;  (other-window 1))
+(push "~/.emacs.d/amesk/plugins" load-path)
 
-(global-set-key "\C-x2" (lambda () (interactive)(split-window-vertically) (other-window 1)))
-(global-set-key "\C-x3" (lambda () (interactive)(split-window-horizontally) (other-window 1)))
+(setq amesk/config-base "~/.emacs.d/amesk/")
+(setq amesk/rc-files-base (concat  amesk/config-base "rc/"))
 
-;;
-;; Resize window (recursive-version)
-;;
-;; (defun v-resize (key)
-;;  "interactively resize the window"
-;;  (interactive "cHit +/- to enlarge/shrink")
-;;    (cond
-;;      ((eq key (string-to-char "+"))
-;;         (enlarge-window 1)
-;;         (call-interactively 'v-resize))
-;;      ((eq key (string-to-char "-"))
-;;         (enlarge-window -1)
-;;         (call-interactively 'v-resize))
-;;      (t (push key unread-command-events))))
-;; (global-set-key "\C-c+" 'v-resize)
-
-;;
-;; Resize window interactively
-;;
-(defvar enlarge-window-char ?+)
-(defvar shrink-window-char ?-)
-(defun resize-window (&optional arg)
-  "Interactively resize the selected window.
-  Repeatedly prompt whether to enlarge or shrink the window until the
-  response is neither `enlarge-window-char' or `shrink-window-char'.
-  When called with a prefix arg, resize the window by ARG lines."
-  (interactive "p")
-  (let ((prompt (format "Enlarge/Shrink window (%c/%c)? "
-                        enlarge-window-char shrink-window-char))
-        response)
-    (while (progn
-             (setq response (read-event prompt))
-             (cond ((equal response enlarge-window-char)
-                    (enlarge-window arg)
-                    t)
-                   ((equal response shrink-window-char)
-                    (enlarge-window (- arg))
-                    t)
-                   (t nil))))
-    (push response unread-command-events)))
-
-(global-set-key (kbd "C-x w") 'resize-window)
-
-(require 'cmake-mode)
-
-;; (setq uninav-page-muse-base "~/projects/uninav-page-muse")
-(setq uninav-page-muse-base "E:/Projects/uninav-page-muse")
-
-(setq uninav-page-script (concat uninav-page-muse-base "/uninav-page-muse.el"))
-(if (file-exists-p uninav-page-script) (load-file uninav-page-script) )
-
-;;
-;; Commands problem solving in russian mode (turned on from the system)
-;;
-
-(defun reverse-input-method (input-method)
-  "Build the reverse mapping of single letters from INPUT-METHOD."
-  (interactive
-   (list (read-input-method-name "Use input method (default current): ")))
-  (if (and input-method (symbolp input-method))
-      (setq input-method (symbol-name input-method)))
-  (let ((current current-input-method)
-        (modifiers '(nil (control) (meta) (control meta))))
-    (when input-method
-      (activate-input-method input-method))
-    (when (and current-input-method quail-keyboard-layout)
-      (dolist (map (cdr (quail-map)))
-        (let* ((to (car map))
-               (from (quail-get-translation
-                      (cadr map) (char-to-string to) 1)))
-          (when (and (characterp from) (characterp to))
-            (dolist (mod modifiers)
-              (define-key (if mod input-decode-map local-function-key-map)
-                (vector (append mod (list from)))
-                (vector (append mod (list to)))))))))
-    (when input-method
-      (activate-input-method current))))
+(load-file (concat amesk/rc-files-base "emacs-rc-force-load.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-maxframe.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-ecb.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-tags.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-cpplint.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-yasnippet.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-auto-insert.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-interactive-resize-window.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-reverse-input-method.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-customize-cpp-devel.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-keybindings.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-muse.el"))
 
 
-(defadvice read-passwd (around my-read-passwd act)
-  (let ((local-function-key-map nil))
-    ad-do-it))
-
-(reverse-input-method 'russian-computer)
-
-(require 'fill-column-indicator)
-(require 'google-c-style)
-
-(defun customize-cpp ()
-  "Customize C++ coding style & visualization options"
-  (setq whitespace-style '(faces tabs tab-mark lines-tail))
-  (setq whitespace-line-column 81)
-  ;; make whitespace-mode use “¶” for newline and “▷” for tab.
-  ;; together with the rest of its defaults
-  (setq whitespace-display-mappings
-        '(
-          (space-mark 32 [183] [46]) ; normal space, ·
-          (space-mark 160 [164] [95])
-          (space-mark 2208 [2212] [95])
-          (space-mark 2336 [2340] [95])
-          (space-mark 3616 [3620] [95])
-          (space-mark 3872 [3876] [95])
-          (newline-mark 10 [182 10]) ; newlne, ¶
-          (tab-mark 9 [9655 9] [92 9]) ; tab, ▷
-          ))
-  (setq fill-column 81)
-  (fci-mode)
-  (whitespace-mode)
-  (google-set-c-style)
-  (google-make-newline-indent))
-
-(add-hook 'c-mode-common-hook 'customize-cpp)
+(let* ((fname (concat amesk/rc-files-base "emacs-rc-local-" (amesk/get-short-hostname) ".el")))
+  (when (file-exists-p fname)
+    (load fname)))
 
 ;;; init.el ends here
