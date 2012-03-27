@@ -1,9 +1,140 @@
+;; Determine projects location
+
 (cond
  ((equal (amesk/get-short-hostname) "vottl-amesk")
-    (setq uninav-page-muse-base "~/projects/uninav-page-muse/"))
+    (setq amesk-projects-base "~/projects/"))
+ ((equal (amesk/get-short-hostname) "amesker-5935")
+    (setq amesk-projects-base "~/projects/"))
  ((equal (amesk/get-short-hostname) "VOTTD-AMESK7")
-    (setq uninav-page-muse-base "E:/Projects/uninav-page-muse/"))
- (t (uninav-page-muse-base "undefined")))
+    (setq amesk-projects-base "E:/Projects/"))
+ (t (amesk-projects-base "undefined")))
 
-(setq uninav-page-script (concat uninav-page-muse-base "uninav-page-muse.el"))
-(if (file-exists-p uninav-page-script) (load-file uninav-page-script) )
+;; Now, include muse modules
+
+(require 'muse-mode)
+(require 'muse-html)
+(require 'muse-colors)
+(require 'muse-wiki)
+(require 'muse-latex)
+(require 'muse-texinfo)
+(require 'muse-docbook)
+(require 'muse-project)
+
+;; So, let's roll
+
+(add-to-list 'auto-mode-alist '("\\.muse$" . muse-mode))
+
+(custom-set-variables
+ '(muse-html-encoding-default (quote utf-8))
+ '(muse-html-meta-content-encoding (quote utf-8))
+ '(muse-html-charset-default "utf-8")
+ '(muse-file-extension "muse")
+ '(muse-mode-auto-p nil)
+ '(muse-wiki-allow-nonexistent-wikiword nil)
+ '(muse-wiki-use-wikiword nil)
+ '(muse-ignored-extensions (quote ("bz2" "gz" "[Zz]" "rej" "orig" "png" "gitignore" "gif"
+                                   "css" "jpg" "html" "sh" "lftp" "pdf")))
+ '(muse-html-table-attributes '"border=\"1\" cellspacing=\"0\"")
+ )
+
+(defun amesk-muse-mode-hook ()
+  (setq auto-fill-mode t)
+  (flyspell-mode 1)
+  (footnote-mode 1)
+  )
+(add-hook 'muse-mode-hook 'amesk-muse-mode-hook)
+
+(setq uninav-page-muse-base (concat amesk-projects-base "uninav-page-muse/"))
+(setq amesk-blogspot-base (concat amesk-projects-base "amesk-blogspot/"))
+
+(muse-derive-style "uninav-page-html" "html"
+                   :header (concat uninav-page-muse-base "/header.tmpl")
+                   :footer (concat uninav-page-muse-base "/footer.tmpl"))
+
+(muse-derive-style "amesk-blogspot-html" "html"
+                   :header ""
+                   :footer ""
+                   :style-sheet "")
+
+(muse-derive-style "uninav-page-pdf" "pdf"
+                   :header (concat uninav-page-muse-base "/header.tex")
+                   :footer (concat uninav-page-muse-base "/footer.tex"))
+
+(setq muse-project-alist
+      `(
+        ("uninav-page"
+          (,@(muse-project-alist-dirs uninav-page-muse-base) :default "index")
+          ,@(muse-project-alist-styles uninav-page-muse-base
+                                       uninav-page-muse-base
+                                       "uninav-page-html")
+          (:base "uninav-page-pdf"
+                 :path (concat uninav-page-muse-base "/en")
+                 :include "/alexott-cv-en[^/]*$")
+          (:base "uninav-page-pdf"
+                 :path (concat uninav-page-muse-base "/ru")
+                 :include "/alexott-cv-ru[^/]*$"))
+         )
+      )
+
+(add-to-list 'muse-project-alist
+      `("amesk-blogspot" (,@(muse-project-alist-dirs amesk-blogspot-base)
+                           :default "index")
+         ,@(muse-project-alist-styles amesk-blogspot-base
+                                      amesk-blogspot-base
+                                      "amesk-blogspot-html")))
+
+(defun muse-gen-relative-name (name)
+  (concat
+   (file-name-directory (muse-wiki-resolve-project-page (muse-project)))
+   name))
+
+(defun muse-mp-detect-language ()
+  (let ((lang "NN")
+        (cur-dir (file-name-directory (muse-current-file)))
+        )
+    (let ((smatch (string-match "/\\(ru\\|en\\|de\\)/" cur-dir)))
+      (when smatch
+        (setq lang (substring cur-dir (+ smatch 1) (+ smatch 3)))))
+    lang))
+
+(load-file (concat uninav-page-muse-base "/uninav-page-menu.el"))
+
+(defun muse-uninav-generate-menu ()
+  (let* ((menu-lang (muse-mp-detect-language))
+         (menu-struct (assoc menu-lang uninav-page-menu))
+         (menu-string "")
+         (rel-dir (file-name-directory (muse-wiki-resolve-project-page (muse-project))))
+         (rel-path (if (> (length rel-dir) 2)   (substring rel-dir 3) ""))
+         (cur-path-muse (muse-current-file))
+         (cur-path-html (replace-regexp-in-string "\\.muse" ".html" cur-path-muse))
+         )
+      (when menu-struct
+        (let ((menu-list (if (not (null menu-struct)) (cdr menu-struct))))
+          (setq menu-string
+                (concat "<ul class=\"avmenu\">"
+                        (apply #'concat
+                               (mapcar
+                                (lambda (x)
+                                  (concat "<li><a href=\"" rel-path (car x)
+                                          (if (string-match (concat "/" menu-lang "/" (car x))
+                                                            cur-path-html)
+                                              "\" class=\"current\""
+                                            "\"")
+                                          ">" (cdr x) "</a></li>"))
+                                menu-list))
+                        "</ul>"))))
+      menu-string))
+
+(defun muse-get-current-project-root (fname)
+  (let ((dname (file-truename (file-name-directory fname)))
+        (rname (file-name-directory (muse-wiki-resolve-project-page (muse-project)))))
+    (file-truename (concat dname rname))))
+
+(defun muse-get-file-relative-name (fname)
+  (substring (file-truename fname) (length (muse-get-current-project-root fname))))
+
+(defun generate-change-date (file)
+  (when (file-exists-p file)
+    (let* ((fa (file-attributes file))
+           (mod-time (nth 6 fa)))
+      (format-time-string "%d.%m.%Y %R" mod-time))))

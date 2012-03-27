@@ -7,7 +7,7 @@
   (interactive)
   (get-buffer-create amesk/cpplint-buffer-name)
   (shell-command
-   (format "%s %s" amesk/path-to-cpplint  amesk/buffer-file-name)
+   (format "%s %s" amesk/path-to-cpplint  buffer-file-name)
    amesk/cpplint-buffer-name amesk/cpplint-buffer-name)
   (switch-to-buffer amesk/cpplint-buffer-name)
   (compilation-mode)
