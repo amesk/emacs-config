@@ -32,7 +32,7 @@
 (load-file (concat amesk/rc-files-base "emacs-rc-customize-cpp-devel.el"))
 (load-file (concat amesk/rc-files-base "emacs-rc-keybindings.el"))
 (load-file (concat amesk/rc-files-base "emacs-rc-muse.el"))
-
+(load-file (concat amesk/rc-files-base "emacs-rc-text-translator.el"))
 
 (let* ((fname (concat amesk/rc-files-base "emacs-rc-local-" (amesk/get-short-hostname) ".el")))
   (when (file-exists-p fname)
