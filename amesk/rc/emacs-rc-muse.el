@@ -19,6 +19,7 @@
 (require 'muse-texinfo)
 (require 'muse-docbook)
 (require 'muse-project)
+(require 'muse-book)
 
 ;; So, let's roll
 
@@ -48,8 +49,8 @@
 (setq amesk-blogspot-base (concat amesk-projects-base "amesk-blogspot/"))
 
 (muse-derive-style "uninav-page-html" "html"
-                   :header (concat uninav-page-muse-base "/header.tmpl")
-                   :footer (concat uninav-page-muse-base "/footer.tmpl"))
+                   :header (concat uninav-page-muse-base "header.tmpl")
+                   :footer (concat uninav-page-muse-base "footer.tmpl"))
 
 (muse-derive-style "amesk-blogspot-html" "html"
                    :header ""
@@ -57,8 +58,8 @@
                    :style-sheet "")
 
 (muse-derive-style "uninav-page-pdf" "pdf"
-                   :header (concat uninav-page-muse-base "/header.tex")
-                   :footer (concat uninav-page-muse-base "/footer.tex"))
+                   :header (concat uninav-page-muse-base "header.tex")
+                   :footer (concat uninav-page-muse-base "footer.tex"))
 
 (setq muse-project-alist
       `(
@@ -73,15 +74,70 @@
           (:base "uninav-page-pdf"
                  :path (concat uninav-page-muse-base "/ru")
                  :include "/alexott-cv-ru[^/]*$"))
-         )
-      )
+               )
+             )
+
+(setq  uninav-spec-base
+       (expand-file-name (concat uninav-page-muse-base
+                                 "ru/UniNav/UNINAV_2_spec/")))
+
+(muse-derive-style "uninav-spec-book-pdf" "book-pdf"
+                   :header (concat uninav-page-muse-base "book-header.tex")
+                   :footer (concat uninav-page-muse-base "book-footer.tex")
+                   :publish 'muse-book-publish)
 
 (add-to-list 'muse-project-alist
-      `("amesk-blogspot" (,@(muse-project-alist-dirs amesk-blogspot-base)
-                           :default "index")
-         ,@(muse-project-alist-styles amesk-blogspot-base
-                                      amesk-blogspot-base
-                                      "amesk-blogspot-html")))
+             `("UNINAV_2_spec"
+               (:nochapters t  ; do automatically add chapters
+                :book-chapter "Основная спецификация"
+                ,(concat uninav-spec-base "index")
+
+                :book-chapter "Внутренние подсистемы"
+                ,(concat uninav-spec-base "AddInfoServer")
+                ,(concat uninav-spec-base "MagnDeclination")
+                ,(concat uninav-spec-base "NavKernel")
+                ,(concat uninav-spec-base "Playback")
+                ,(concat uninav-spec-base "QtWidgets")
+                ,(concat uninav-spec-base "TargetsTracks")
+                ,(concat uninav-spec-base "ShipLogBook")
+                ,(concat uninav-spec-base "Multiunits")
+                ,(concat uninav-spec-base "OnlineCheckRoute")
+                ,(concat uninav-spec-base "ShipTrack")
+                ,(concat uninav-spec-base "Opersit")
+                ,(concat uninav-spec-base "SystemLogBook ")
+
+                :book-chapter "Картография и математика"
+                ,(concat uninav-spec-base "GeoCalcSimplifiedItf")
+                ,(concat uninav-spec-base "ChartToolbar")
+                ,(concat uninav-spec-base "PolarGeoCalc")
+
+                :book-chapter "Пользовательский интерфейс"
+                ,(concat uninav-spec-base "MultiunitsPage")
+                ,(concat uninav-spec-base "MonitoringPage")
+                ,(concat uninav-spec-base "NavigationPage")
+
+                :book-chapter "Подключение к  MFD"
+                ,(concat uninav-spec-base "PureSlaveNavData")
+                ,(concat uninav-spec-base "PureSlaveCharts")
+
+                :book-chapter "Инсталляционный пакет"
+                ,(concat uninav-spec-base "WindowsInstaller")
+                ,(concat uninav-spec-base "DebianInstaller")
+
+                :book-end t ; the rest will not be placed in the book
+                :default "index")
+              (:base "uninav-spec-book-pdf"
+               :path "~/public_pdf"
+               :include ,(concat uninav-spec-base "[^/]+$"))
+              ))
+
+
+;; (add-to-list 'muse-project-alist
+;;              `("amesk-blogspot" (,@(muse-project-alist-dirs amesk-blogspot-base)
+;;                                  :default "index")
+;;                ,@(muse-project-alist-styles amesk-blogspot-base
+;;                                        amesk-blogspot-base
+;;                                       "amesk-blogspot-html")))
 
 (defun muse-gen-relative-name (name)
   (concat
