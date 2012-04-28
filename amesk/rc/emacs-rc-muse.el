@@ -128,7 +128,7 @@
                 :default "index")
               (:base "uninav-spec-book-pdf"
                :path "~/public_pdf"
-               :include ,(concat uninav-spec-base "[^/]+$"))
+               :include ,(concat uninav-spec-base "index.*$"))
               ))
 
 
