@@ -5,6 +5,11 @@
 (require 'fill-column-indicator)
 (require 'google-c-style)
 
+;;;
+;;; Force Google C++-style
+;;;
+
+
 (defun amesk/customize-cpp ()
   "Customize C++ coding style & visualization options for
    Google style conformance"
@@ -30,3 +35,41 @@
   (google-make-newline-indent))
 
 (add-hook 'c-mode-common-hook 'amesk/customize-cpp)
+
+;;;
+;;; Define switch between cpp/h
+;;;
+
+(defvar amesk/header-switches '(("h" . ("cpp" "cc" "c"))
+                                ("hpp" . ("cpp" "cc"))
+                                ("cpp" . ("h" "hpp"))
+                                ("c" . ("h"))
+                                ("C" . ("H"))
+                                ("H" . ("C" "CPP" "CC"))
+                                ("cc" . ("h" "hpp"))))
+
+(defun amesk/string-without-last (string n)
+  "This function truncates from the STRING last N characters."
+  (substring string 0 (max 0(- (length string) n))))
+
+(defun amesk/switch-h-cpp ()
+  "Switch header and body file according to `amesk/header-switches' var.
+The current buffer's file name extention is searched in
+`amesk/header-switches' variable to find out extention for file's counterpart,
+for example *.hpp <--> *.cpp."
+  (interactive)
+  (let* ((ext (file-name-extension (buffer-file-name)))
+         (base-name (amesk/string-without-last (buffer-name) (length ext)))
+         (base-path (amesk/string-without-last (buffer-file-name) (length ext)))
+         (count-ext (cdr (find-if (lambda (i) (string= (car i) ext)) amesk/header-switches))))
+    (cond
+     (count-ext
+      (unless
+          (or
+           (loop for b in (mapcar (lambda (i) (concat base-name i)) count-ext)
+                 when (bufferp (get-buffer b)) return (switch-to-buffer b))
+           (loop for c in (mapcar (lambda (count-ext) (concat base-path count-ext)) count-ext)
+                 when (file-exists-p c) return (find-file c)))
+        (message "There is no corresponding pair (header or body) file.")))
+     (t
+      (message "It is not a header or body file! See amesk/header-switches variable.")))))

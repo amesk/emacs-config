@@ -1,5 +1,6 @@
 (global-set-key (kbd "<f7>") 'recompile)
 (global-set-key (kbd "<f5>") (lambda () (interactive)(shell-command "cd ~/projects/uninav/out/bin && ./plotter&")))
+
 (global-set-key (kbd "C-x e") 'amesk/ecb-toggle-proc)
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 (global-set-key (kbd "C-<kp-home>") 'beginning-of-buffer)
@@ -12,3 +13,7 @@
 (global-set-key "\C-x2" (lambda () (interactive)(split-window-vertically) (other-window 1)))
 (global-set-key "\C-x3" (lambda () (interactive)(split-window-horizontally) (other-window 1)))
 (global-set-key "\C-x\M-t" 'text-translator)
+
+(defun amesk/c-mode-common-hook ()
+  (define-key c-mode-base-map (kbd "M-o") 'amesk/switch-h-cpp))
+(add-hook 'c-mode-common-hook 'amesk/c-mode-common-hook)
