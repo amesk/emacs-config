@@ -35,7 +35,7 @@
  '(muse-wiki-use-wikiword nil)
  '(muse-ignored-extensions (quote ("bz2" "gz" "[Zz]" "rej" "orig" "png" "gitignore" "gif"
                                    "css" "jpg" "html" "sh" "lftp" "pdf")))
- '(muse-html-table-attributes '"border=\"1\" cellspacing=\"0\"")
+ '(muse-html-table-attributes '" border=\"1\" cellspacing=\"0\"")
  )
 
 (defun amesk-muse-mode-hook ()
@@ -194,3 +194,8 @@
     (let* ((fa (file-attributes file))
            (mod-time (nth 6 fa)))
       (format-time-string "%d.%m.%Y %R" mod-time))))
+
+;; (when (and window-system (load "httpd" t))
+;;   (require 'muse-http)
+;;   ;;(add-hook 'after-init-hook 'httpd-start)
+;;   (setq httpd-document-root (expand-file-name "~/projects/uninav-page-muse")))
