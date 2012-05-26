@@ -17,3 +17,5 @@
 (defun amesk/c-mode-common-hook ()
   (define-key c-mode-base-map (kbd "M-o") 'amesk/switch-h-cpp))
 (add-hook 'c-mode-common-hook 'amesk/c-mode-common-hook)
+
+(global-set-key "\C-x\M-t" 'text-translator)
