@@ -48,34 +48,79 @@
 (require 'recentf)
 
 ;; backport some functionality to Emacs 22 if needed
-(require 'dominating-file)
+;; (require 'dominating-file)
 
 ;; Load up starter kit customizations
 
 (require 'starter-kit-defuns)
 (require 'starter-kit-bindings)
 (require 'starter-kit-misc)
-(require 'starter-kit-registers)
+;; (require 'starter-kit-registers)
 (require 'starter-kit-eshell)
-(require 'starter-kit-lisp)
-(require 'starter-kit-perl)
-(require 'starter-kit-ruby)
-(require 'starter-kit-js)
+;; (require 'starter-kit-lisp)
+;; (require 'starter-kit-perl)
+;; (require 'starter-kit-ruby)
+;; (require 'starter-kit-js)
 
 (regen-autoloads)
 (load custom-file 'noerror)
 
 ;; You can keep system- or user-specific customizations here
-(setq system-specific-config (concat dotfiles-dir system-name ".el")
-      user-specific-config (concat dotfiles-dir user-login-name ".el")
-      user-specific-dir (concat dotfiles-dir user-login-name))
-(add-to-list 'load-path user-specific-dir)
-
-(if (file-exists-p system-specific-config) (load system-specific-config))
-(if (file-exists-p user-specific-dir)
-  (mapc #'load (directory-files user-specific-dir nil ".*el$")))
-(if (file-exists-p user-specific-config) (load user-specific-config))
+;; (setq system-specific-config (concat dotfiles-dir system-name ".el")
+;;       user-specific-config (concat dotfiles-dir user-login-name ".el")
+;;       user-specific-dir (concat dotfiles-dir user-login-name))
+;; (add-to-list 'load-path user-specific-dir)
+;;
+;; (if (file-exists-p system-specific-config) (load system-specific-config))
+;; (if (file-exists-p user-specific-dir)
+;;   (mapc #'load (directory-files user-specific-dir nil ".*el$")))
+;; (if (file-exists-p user-specific-config) (load user-specific-config))
 
 ;;; init.el ends here
 
 (put 'scroll-left 'disabled nil)
+
+;; Amesk patches
+
+(defun amesk/get-short-hostname ()
+  (let* ((sys-name (system-name))
+         (idx (string-match "\\." sys-name)))
+    (if idx
+        (substring sys-name 0 idx)
+      sys-name)))
+
+(setq compile-command "cd ${PWD%/src/*} && ./hammer build")
+(setq compilation-scroll-output t)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(setq column-number-mode t)
+;; compile window splits always vertically
+(setq split-height-threshold 0)
+(setq split-width-threshold nil)
+
+(push "~/.emacs.d/plugins" load-path)
+
+(setq amesk/config-base "~/.emacs.d/")
+(setq amesk/rc-files-base (concat  dotfiles-dir "rc/"))
+
+(load-file (concat amesk/rc-files-base "emacs-rc-force-load.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-maxframe.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-ecb.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-tags.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-cpplint.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-yasnippet.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-auto-insert.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-interactive-resize-window.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-reverse-input-method.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-customize-cpp-devel.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-keybindings.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-muse.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-text-translator.el"))
+(load-file (concat amesk/rc-files-base "emacs-rc-edit-server.el"))
+
+(let* ((fname (concat amesk/rc-files-base "emacs-rc-local-" (amesk/get-short-hostname) ".el")))
+  (when (file-exists-p fname)
+    (load fname)))
+
+(server-start)
+
+;;; init.el ends here
