@@ -65,10 +65,10 @@
 (load-file (concat amesk/rc-files-base "emacs-rc-edit-server.el"))
 (load-file (concat amesk/rc-files-base "emacs-rc-misc.el"))
 
-if((fboundp 'amesk/get-short-hostname)
-   (let* ((fname (concat amesk/rc-files-base "emacs-rc-local-" (amesk/get-short-hostname) ".el")))
-     (when (file-exists-p fname)
-       (load fname))))
+(if (fboundp 'amesk/get-short-hostname)
+    (let* ((fname (concat amesk/rc-files-base "emacs-rc-local-" (amesk/get-short-hostname) ".el")))
+      (when (file-exists-p fname)
+        (load fname))))
 
 (load custom-file 'noerror)
 
