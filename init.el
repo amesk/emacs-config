@@ -20,14 +20,16 @@
 (setq dotfiles-dir (file-name-directory
                     (or (buffer-file-name) load-file-name)))
 
+(setq amesk/config-base dotfiles-dir)
+(setq amesk/rc-files-base (concat  dotfiles-dir "rc/"))
+
 (add-to-list 'load-path dotfiles-dir)
+(add-to-list 'load-path (concat dotfiles-dir "/plugins"))
+(add-to-list 'load-path (concat dotfiles-dir "/rc"))
 
 (setq autoload-file (concat dotfiles-dir "loaddefs.el"))
 (setq package-user-dir (concat dotfiles-dir "elpa"))
 (setq custom-file (concat dotfiles-dir "custom.el"))
-
-(add-to-list 'load-path (concat dotfiles-dir "/plugins"))
-(add-to-list 'load-path (concat dotfiles-dir "/rc"))
 
 ;; These should be loaded on startup rather than autoloaded on demand
 ;; since they are likely to be used in every session
@@ -40,9 +42,6 @@
 (require 'recentf)
 
 (push "~/.emacs.d/plugins" load-path)
-
-(setq amesk/config-base "~/.emacs.d/")
-(setq amesk/rc-files-base (concat  dotfiles-dir "rc/"))
 
 (load-file (concat amesk/rc-files-base "emacs-rc-elpa.el"))
 (load-file (concat amesk/rc-files-base "emacs-rc-defuns.el"))
