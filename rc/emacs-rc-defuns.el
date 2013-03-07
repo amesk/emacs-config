@@ -34,15 +34,15 @@ Symbols matching the text at point are put first in the completion list."
                              (cond
                               ((and (listp symbol) (imenu--subalist-p symbol))
                                (addsymbols symbol))
-                              
+
                               ((listp symbol)
                                (setq name (car symbol))
                                (setq position (cdr symbol)))
-                              
+
                               ((stringp symbol)
                                (setq name symbol)
                                (setq position (get-text-property 1 'org-imenu-marker symbol))))
-                             
+
                              (unless (or (null position) (null name))
                                (add-to-list 'symbol-names name)
                                (add-to-list 'name-and-pos (cons name position))))))))
@@ -107,7 +107,7 @@ Symbols matching the text at point are put first in the completion list."
 (add-hook 'coding-hook 'pretty-lambdas)
 (add-hook 'coding-hook 'add-watchwords)
 (add-hook 'coding-hook 'turn-on-idle-highlight)
-  
+
 (defun run-coding-hook ()
   "Enable things that are convenient across all coding buffers."
   (run-hooks 'coding-hook))
@@ -162,19 +162,19 @@ Symbols matching the text at point are put first in the completion list."
   ;; TODO: remove elpa-to-submit once everything's submitted.
   (byte-recompile-directory (concat dotfiles-dir "elpa-to-submit/") 0))
 
-(defun regen-autoloads (&optional force-regen)
-  "Regenerate the autoload definitions file if necessary and load it."
-  (interactive "P")
-  (let ((autoload-dir (concat dotfiles-dir "/elpa-to-submit"))
-        (generated-autoload-file autoload-file))
-    (when (or force-regen
-              (not (file-exists-p autoload-file))
-              (some (lambda (f) (file-newer-than-file-p f autoload-file))
-                    (directory-files autoload-dir t "\\.el$")))
-      (message "Updating autoloads...")
-      (let (emacs-lisp-mode-hook)
-        (update-directory-autoloads autoload-dir))))
-  (load autoload-file))
+;; (defun regen-autoloads (&optional force-regen)
+;;   "Regenerate the autoload definitions file if necessary and load it."
+;;   (interactive "P")
+;;   (let ((autoload-dir (concat dotfiles-dir "/elpa-to-submit"))
+;;         (generated-autoload-file autoload-file))
+;;     (when (or force-regen
+;;               (not (file-exists-p autoload-file))
+;;               (some (lambda (f) (file-newer-than-file-p f autoload-file))
+;;                     (directory-files autoload-dir t "\\.el$")))
+;;       (message "Updating autoloads...")
+;;       (let (emacs-lisp-mode-hook)
+;;         (update-directory-autoloads autoload-dir))))
+;;   (load autoload-file))
 
 (defun sudo-edit (&optional arg)
   (interactive "p")
