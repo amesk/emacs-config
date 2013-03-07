@@ -30,12 +30,16 @@
 (setq package-user-dir (concat dotfiles-dir "elpa"))
 (setq custom-file (concat dotfiles-dir "custom.el"))
 
-(require 'package)
-(dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
-                  ("elpa" . "http://tromey.com/elpa/")))
-  (add-to-list 'package-archives source t))
-(package-initialize)
-(require 'starter-kit-elpa)
+(add-to-list 'load-path (concat dotfiles-dir "/plugins"))
+(add-to-list 'load-path (concat dotfiles-dir "/rc"))
+
+;; (require 'package)
+;; (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
+;;                   ("elpa" . "http://tromey.com/elpa/")))
+;;   (add-to-list 'package-archives source t))
+;; (package-initialize)
+;; ;; (require 'starter-kit-elpa)
+;; (require 'emacs-rc-elpa)
 
 ;; These should be loaded on startup rather than autoloaded on demand
 ;; since they are likely to be used in every session
@@ -62,23 +66,22 @@
 ;; (require 'starter-kit-ruby)
 ;; (require 'starter-kit-js)
 
-;; Ripped from starter-kit-defuns.el
-(defun regen-autoloads (&optional force-regen)
-  "Regenerate the autoload definitions file if necessary and load it."
-  (interactive "P")
-  (let ((autoload-dir (concat dotfiles-dir "/elpa-to-submit"))
-        (generated-autoload-file autoload-file))
-    (when (or force-regen
-              (not (file-exists-p autoload-file))
-              (some (lambda (f) (file-newer-than-file-p f autoload-file))
-                    (directory-files autoload-dir t "\\.el$")))
-      (message "Updating autoloads...")
-      (let (emacs-lisp-mode-hook)
-        (update-directory-autoloads autoload-dir))))
-  (load autoload-file))
-
-(regen-autoloads)
-(load custom-file 'noerror)
+;;; Ripped from starter-kit-defuns.el
+;; (defun regen-autoloads (&optional force-regen)
+;;   "Regenerate the autoload definitions file if necessary and load it."
+;;   (interactive "P")
+;;   (let ((autoload-dir (concat dotfiles-dir "/elpa-to-submit"))
+;;         (generated-autoload-file autoload-file))
+;;     (when (or force-regen
+;;               (not (file-exists-p autoload-file))
+;;               (some (lambda (f) (file-newer-than-file-p f autoload-file))
+;;                     (directory-files autoload-dir t "\\.el$")))
+;;       (message "Updating autoloads...")
+;;       (let (emacs-lisp-mode-hook)
+;;         (update-directory-autoloads autoload-dir))))
+;;   (load autoload-file))
+;;
+;; (regen-autoloads)
 
 ;; You can keep system- or user-specific customizations here
 ;; (setq system-specific-config (concat dotfiles-dir system-name ".el")
@@ -117,6 +120,7 @@
 (setq amesk/config-base "~/.emacs.d/")
 (setq amesk/rc-files-base (concat  dotfiles-dir "rc/"))
 
+(load-file (concat amesk/rc-files-base "emacs-rc-elpa.el"))
 (load-file (concat amesk/rc-files-base "emacs-rc-defuns.el"))
 (load-file (concat amesk/rc-files-base "emacs-rc-force-load.el"))
 (load-file (concat amesk/rc-files-base "emacs-rc-eshell.el"))
@@ -140,5 +144,7 @@
     (load fname)))
 
 (server-start)
+
+(load custom-file 'noerror)
 
 ;;; init.el ends here

@@ -3,6 +3,12 @@
 ;; Part of the Emacs Starter Kit
 
 (require 'cl)
+(require 'package)
+(dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
+		  ("elpa" . "http://tromey.com/elpa/")))
+  (add-to-list 'package-archives source t))
+(package-initialize)
+
 
 ;; (defvar starter-kit-packages (list 'idle-highlight-mode
 ;;                                    'ruby-mode
@@ -15,6 +21,7 @@
 (defvar starter-kit-packages (list 'idle-highlight-mode
                                    'css-mode
                                    'yaml-mode
+                                   'muse
                                    'find-file-in-project
                                    'magit)
 
@@ -55,4 +62,22 @@ just have to assume it's online."
 ;; Workaround for bug in the ELPA package for yaml-mode
 (autoload 'yaml-mode "yaml-mode" "" t)
 
-(provide 'starter-kit-elpa)
+;; Ripped from starter-kit-defuns.el
+(defun regen-autoloads (&optional force-regen)
+  "Regenerate the autoload definitions file if necessary and load it."
+  (interactive "P")
+  (let ((autoload-dir (concat dotfiles-dir "/elpa-to-submit"))
+        (generated-autoload-file autoload-file))
+    (when (or force-regen
+              (not (file-exists-p autoload-file))
+              (some (lambda (f) (file-newer-than-file-p f autoload-file))
+                    (directory-files autoload-dir t "\\.el$")))
+      (message "Updating autoloads...")
+      (let (emacs-lisp-mode-hook)
+        (update-directory-autoloads autoload-dir))))
+  (load autoload-file))
+
+(regen-autoloads)
+
+;; (provide 'starter-kit-elpa)
+(provide 'emacs-rc-elpa)
