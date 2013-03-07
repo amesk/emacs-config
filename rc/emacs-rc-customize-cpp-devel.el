@@ -2,6 +2,9 @@
 ;;;
 ;;;
 
+(setq compile-command "cd ${PWD%/src/*} && ./hammer build")
+(setq compilation-scroll-output t)
+
 (require 'fill-column-indicator)
 (require 'google-c-style)
 

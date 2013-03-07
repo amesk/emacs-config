@@ -153,5 +153,15 @@
             (unless (string-match "question" oddmuse-post)
               (setq oddmuse-post (concat "uihnscuskc=1;" oddmuse-post)))))
 
+
+(put 'scroll-left 'disabled nil)
+
+;; Amesk patches
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(setq column-number-mode t)
+;; compile window splits always vertically
+(setq split-height-threshold 0)
+(setq split-width-threshold nil)
+
 (provide 'starter-kit-misc)
 ;;; starter-kit-misc.el ends here
