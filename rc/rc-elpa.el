@@ -25,6 +25,7 @@
                                    'yaml-mode
                                    'muse
                                    'find-file-in-project
+                                   'lorem-ipsum
                                    'magit)
 
   "Libraries that should be installed by default.")
