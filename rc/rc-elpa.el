@@ -26,6 +26,7 @@
                                    'muse
                                    'find-file-in-project
                                    'lorem-ipsum
+                                   'yasnippet
                                    'magit)
 
   "Libraries that should be installed by default.")

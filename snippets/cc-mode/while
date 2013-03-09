@@ -1,0 +1,7 @@
+# name: while { ... }
+# key: while
+# --
+
+while (${0:condition}) {
+  $1
+}
