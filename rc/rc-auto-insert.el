@@ -23,7 +23,7 @@
   (save-excursion
     (while (search-forward "###" nil t)
       (save-restriction
-        (narrow-to-region h(match-beginning 0) (match-end 0))
+        (narrow-to-region (match-beginning 0) (match-end 0))
         (replace-match (upcase (file-name-nondirectory buffer-file-name)))
         (subst-char-in-region (point-min) (point-max) ?. ?_)
         (subst-char-in-region (point-min) (point-max) ?- ?_)
