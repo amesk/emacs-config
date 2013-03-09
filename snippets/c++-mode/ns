@@ -1,5 +1,5 @@
 # key: ns
 # name: namespace ...
 # --
-namespace ${0} {
-}  // namespace ${0}
+namespace ${1:Name} {
+}  // namespace ${1:$(yas/substr text "[^: ]*")}
