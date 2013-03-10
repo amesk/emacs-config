@@ -19,17 +19,25 @@
                           ("\\.c$" . ["insert.cpp" amesk/auto-update-c-source-file])
                           ))
 
+(defun amesk/compute-header-guard (hdr-name)
+ (let ((name hdr-name))
+   (if (string-match "^.+/uninav/src/" name)
+       (progn
+         (setq name (upcase (replace-match "src/" t t name)))
+         (while (string-match "[./\\]" name)
+           (setq name (replace-match "_" t t name)))
+         (concat name "_"))
+       (concat (upcase (file-name-nondirectory (file-name-sans-extension hdr-name))) "_H_"))))
+
 (defun amesk/auto-replace-header-name ()
+(let ((name (amesk/compute-header-guard buffer-file-name)))
   (save-excursion
     (while (search-forward "###" nil t)
       (save-restriction
         (narrow-to-region (match-beginning 0) (match-end 0))
-        (replace-match (upcase (file-name-nondirectory buffer-file-name)))
+        (replace-match name)
         (subst-char-in-region (point-min) (point-max) ?. ?_)
-        (subst-char-in-region (point-min) (point-max) ?- ?_)
-        ))
-    )
-  )
+        (subst-char-in-region (point-min) (point-max) ?- ?_))))))
 
 (defun amesk/auto-replace-file-name ()
   (save-excursion
