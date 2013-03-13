@@ -186,30 +186,34 @@ Symbols matching the text at point are put first in the completion list."
 (defun amesk/switch-to-buffer-wrap ()
 "Wrap switch-to-buffer function.
 The primary goal is to set the major mode depending on a buffer name.
-The secondary goal is to force auto-insert functionality."
- (let ((name ""))
-  ; Emulate original switch-to-buffer behaviour for \Cx-b
-  ; Use ido-read-buffer, if available
-  (setq name (if (fboundp 'ido-read-buffer)
-                 (ido-read-buffer "Buffer: ")
-               (read-buffer "Buffer: ")))
-  (switch-to-buffer name)
-  ; Only mangle if auto-insert present
-  (when (fboundp 'auto-insert)
-    ; Do it for new buffers only
-    (when (and (= 0 (buffer-size)) (not buffer-file-name))
-      ; Choose a major mode for empty new buffers
-      (mapcar(lambda (x) (when (string-match (car x) name)
-                           (setq auto-insert
-                                 (concat "\\" (file-name-extension
-                                               (buffer-name) t)))
-                           (funcall (cdr x))))
-             auto-mode-alist)
-      ; Hack a little auto-insert
-      (setq buffer-file-name (buffer-name))
-      (auto-insert)
-      ; Restore hack side effect
-      (setq buffer-file-name nil)))))
+The secondary goal is to force auto-insert functionality (if available).
+Typical usage:
+    (global-set-key (kbd "C-x b") 'amesk/switch-to-buffer-wrap)"
+  (interactive)
+  (let ((name ""))
+    ;; Emulate original switch-to-buffer behaviour for \Cx-b
+    ;; Use ido-read-buffer, if available
+    (setq name (if (fboundp 'ido-read-buffer)
+                   (ido-read-buffer "Buffer: ")
+                 (read-buffer "Buffer: ")))
+    (switch-to-buffer name)
+    ;; Only mangle if auto-insert present
+    (when (fboundp 'auto-insert)
+      ;;  Do it for new buffers only
+      (when (and (= 0 (buffer-size)) (not buffer-file-name))
+        ;; Choose a major mode for empty new buffers
+        (mapcar(lambda (x) (when (string-match (car x) name)
+                             (setq auto-insert
+                                   (concat "\\" (file-name-extension
+                                                 (buffer-name) t)))
+                             (funcall (cdr x))))
+               auto-mode-alist)
+        ;; Hack a little auto-insert
+        (setq buffer-file-name (buffer-name))
+        (auto-insert)
+        ;; Restore hack side effect
+        (setq buffer-file-name nil)))))
 
 (provide 'starter-kit-defuns)
+
 ;;; starter-kit-defuns.el ends here
