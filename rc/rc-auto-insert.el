@@ -32,6 +32,8 @@
 (defun amesk/auto-replace-header-name ()
 (let ((name (amesk/compute-header-guard buffer-file-name)))
   (save-excursion
+    (when (string-match "^.+/uninav/src/" name)
+      (replace-string "<Project>" "UniNav Project"))
     (while (search-forward "###" nil t)
       (save-restriction
         (narrow-to-region (match-beginning 0) (match-end 0))
