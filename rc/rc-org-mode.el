@@ -7,7 +7,7 @@
 (setq org-agenda-files (quote ("~/.org/")))
 
 ;my prefer identation
-(setq org-startup-indented t)
+(setq org-startup-indented t) ; # +STARTUP: hidestars
 (setq org-open-at-point t) ; open link on <RET>
 
 ;;logging stuff

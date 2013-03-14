@@ -1,12 +1,13 @@
-;;; (>>FILE<<) --- 
-
-;; Copyright (C) Alex Ott
+;;; (>>FILE<<) ---
 ;;
-;; Author: Alex Ott <alexott@gmail.com>
-;; Keywords: 
-;; Requirements: 
-;; Status: not intended to be distributed yet
-
+;;  Copyright (C) 2012 Transas MIP Ltd.
+;;
+;;  <Project>
+;;
+;;  <Description>
+;;
+;;  Author: amesk <alexei.eskenazi@transas.com>
+;;
 
 
 
