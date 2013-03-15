@@ -35,7 +35,9 @@
   (fci-mode)
   (whitespace-mode)
   (google-set-c-style)
-  (google-make-newline-indent))
+  (google-make-newline-indent)
+  ;; end files with a newline
+  (setq require-final-newline t))
 
 (add-hook 'c-mode-common-hook 'amesk/customize-cpp)
 

@@ -127,5 +127,9 @@
 (setq split-height-threshold 0)
 (setq split-width-threshold nil)
 
+;;; put something different in the scratch buffer
+;; (setq initial-scratch-message
+;;              (format-time-string "%Y-%m-%d at %T")))
+
 (provide 'starter-kit-misc)
 ;;; starter-kit-misc.el ends here

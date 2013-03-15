@@ -214,6 +214,22 @@ Typical usage:
         ;; Restore hack side effect
         (setq buffer-file-name nil)))))
 
+
+;; edit files with sudo using tramp
+(defun sudo-edit (&optional arg)
+  (interactive "p")
+  (if arg (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
+    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
+
+(defun kill-forward-whitespace ()
+"Kill the whitespace from the current position until the
+next non-whitespace character"
+  (interactive)
+  (let ((start-point (point))
+        (end (skip-chars-forward " \t\n\r")))
+    (kill-region start-point (+ end start-point))))
+
 (provide 'starter-kit-defuns)
 
 ;;; starter-kit-defuns.el ends here

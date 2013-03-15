@@ -73,6 +73,8 @@
 
 (global-set-key (kbd "C-c q") 'join-line)
 
+(global-set-key (kbd "M-\\") 'kill-forward-whitespace)
+
 ;; This is a little hacky since VC doesn't support git add internally
 (eval-after-load 'vc
   (define-key vc-prefix-map "i" '(lambda () (interactive)
