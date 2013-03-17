@@ -61,6 +61,7 @@
 (load-file (concat amesk/rc-files-base "rc-edit-server.el"))
 (load-file (concat amesk/rc-files-base "rc-registers.el"))
 (load-file (concat amesk/rc-files-base "rc-org-mode.el"))
+(load-file (concat amesk/rc-files-base "rc-eproject.el"))
 (load-file (concat amesk/rc-files-base "rc-misc.el"))
 (load-file (concat amesk/rc-files-base "rc-keybindings.el"))
 
