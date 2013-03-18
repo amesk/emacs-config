@@ -57,7 +57,7 @@
 (global-set-key (kbd "C-x C-m") 'execute-extended-command)
 
 ;; Fetch the contents at a URL, display it raw.
-(global-set-key (kbd "C-x C-h") 'view-url)
+;; (global-set-key (kbd "C-x C-h") 'view-url)
 
 ;; Help should search more than just commands
 (global-set-key (kbd "C-h a") 'apropos)
@@ -97,9 +97,6 @@
 ;;; starter-kit-bindings.el ends here
 
 
-(global-set-key (kbd "<f7>") 'recompile)
-(global-set-key (kbd "<f5>") (lambda () (interactive)(shell-command "cd ~/projects/uninav/out/bin && ./plotter&")))
-
 (global-set-key (kbd "C-x e") 'amesk/ecb-toggle-proc)
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 (global-set-key (kbd "C-<kp-home>") 'beginning-of-buffer)
@@ -127,3 +124,11 @@
               (define-key org-mode-map "\C-n" 'org-next-link)
               (define-key org-mode-map "\C-p" 'org-previous-link)))
 
+;; rc-uninav.el keybindings
+
+(global-set-key (kbd "<f7>") 'recompile)
+(global-set-key (kbd "<f5>") (lambda () (interactive)(shell-command "cd ~/projects/uninav/out/bin && ./plotter&")))
+(global-set-key (kbd "C-c f f") '(lambda () (interactive)(flymake-mode 1)))
+(global-set-key (kbd "C-c f F") '(lambda () (interactive)(flymake-mode -1)))
+(global-set-key (kbd "C-c f e") 'flymake-display-err-menu-for-current-line)
+(global-set-key (kbd "C-c f g") 'flymake-goto-next-error)
