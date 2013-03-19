@@ -189,7 +189,7 @@ Symbols matching the text at point are put first in the completion list."
 The primary goal is to set the major mode depending on a buffer name.
 The secondary goal is to force auto-insert functionality (if available).
 Typical usage:
-    (global-set-key (kbd "C-x b") 'amesk/switch-to-buffer-wrap)"
+    (global-set-key (kbd \"C-x b\") 'amesk/switch-to-buffer-wrap)"
   (interactive)
   (let ((name ""))
     ;; Emulate original switch-to-buffer behaviour for \Cx-b
