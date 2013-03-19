@@ -2,6 +2,9 @@
 ;;;
 ;;;
 
+;; We use mostly C++, not C
+(add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
+
 (setq compile-command "cd ${PWD%/src/*} && ./hammer build")
 (setq compilation-scroll-output t)
 
