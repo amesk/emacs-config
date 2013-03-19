@@ -110,6 +110,7 @@ Symbols matching the text at point are put first in the completion list."
   ;; TODO: remove elpa-to-submit once everything's submitted.
   (byte-recompile-directory (concat dotfiles-dir "elpa-to-submit/") 0))
 
+;; edit files with sudo using tramp
 (defun sudo-edit (&optional arg)
   (interactive "p")
   (if (or arg (not buffer-file-name))
@@ -213,13 +214,6 @@ Typical usage:
         (auto-insert)
         ;; Restore hack side effect
         (setq buffer-file-name nil)))))
-
-
-;; edit files with sudo using tramp
-(defun sudo-edit (&optional arg)
-  (interactive "p")
-  (if arg (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
-    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 
 (defun kill-forward-whitespace ()

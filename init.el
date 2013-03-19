@@ -43,26 +43,6 @@
 
 (push "~/.emacs.d/plugins" load-path)
 
-;; (load-file (concat amesk/rc-files-base "rc-elpa.el"))
-;; (load-file (concat amesk/rc-files-base "rc-defuns.el"))
-;; (load-file (concat amesk/rc-files-base "rc-force-load.el"))
-;; (load-file (concat amesk/rc-files-base "rc-eshell.el"))
-;; (load-file (concat amesk/rc-files-base "rc-maxframe.el"))
-;; (load-file (concat amesk/rc-files-base "rc-ecb.el"))
-;; (load-file (concat amesk/rc-files-base "rc-tags.el"))
-;; (load-file (concat amesk/rc-files-base "rc-cpplint.el"))
-;; (load-file (concat amesk/rc-files-base "rc-yasnippet.el"))
-;; (load-file (concat amesk/rc-files-base "rc-auto-insert.el"))
-;; (load-file (concat amesk/rc-files-base "rc-interactive-resize-window.el"))
-;; (load-file (concat amesk/rc-files-base "rc-reverse-input-method.el"))
-;; (load-file (concat amesk/rc-files-base "rc-customize-cpp-devel.el"))
-;; (load-file (concat amesk/rc-files-base "rc-muse.el"))
-;; (load-file (concat amesk/rc-files-base "rc-text-translator.el"))
-;; (load-file (concat amesk/rc-files-base "rc-edit-server.el"))
-;; (load-file (concat amesk/rc-files-base "rc-registers.el"))
-;; (load-file (concat amesk/rc-files-base "rc-org-mode.el"))
-;; (load-file (concat amesk/rc-files-base "rc-misc.el"))
-
 (setq rc-list (list "rc-elpa.el"
                     "rc-defuns.el"
                     "rc-force-load.el"
@@ -81,14 +61,12 @@
                     "rc-edit-server.el"
                     "rc-registers.el"
                     "rc-org-mode.el"
-                    "rc-misc.el"))
+                    "rc-misc.el"
+                    "rc-project-uninav.el"
+                    "rc-keybindings.el"))
 
 (dolist (m rc-list) (load-file (concat amesk/rc-files-base m)))
 
-
-;; UniNav project stuff
-(load-file (concat amesk/rc-files-base "rc-project-uninav.el"))
-(load-file (concat amesk/rc-files-base "rc-keybindings.el"))
 
 (if (fboundp 'amesk/get-short-hostname)
     (let* ((fname (concat amesk/rc-files-base "rc-local-" (amesk/get-short-hostname) ".el")))
