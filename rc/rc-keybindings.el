@@ -53,6 +53,9 @@
 ;; Start a regular shell if you prefer that.
 (global-set-key (kbd "C-x M-m") 'shell)
 
+;; Invoke a shell command
+(global-set-key (kbd "C-x !") 'shell-command)
+
 ;; If you want to be able to M-x without meta (phones, etc)
 (global-set-key (kbd "C-x C-m") 'execute-extended-command)
 
