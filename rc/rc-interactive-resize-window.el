@@ -1,15 +1,22 @@
-;;;
-;;; Resize window interactively
-;;;
+;;; rc-interactive-resize-window.el ---
+;;
+;;  Copyright (C) 2012 Transas MIP Ltd.
+;;
+;;  Personal Emacs configuration
+;;
+;;  Resize window interactively
+;;
+;;  Author: amesk <alexei.eskenazi@transas.com>
+;;
 
 (defvar amesk/enlarge-window-char ?+)
 (defvar amesk/shrink-window-char ?-)
 (defun amesk/resize-window (&optional arg)
   "Interactively resize the selected window.
-  Repeatedly prompt whether to enlarge or shrink
-  the window until the response is neither
-  `amesk/enlarge-window-char' or `amesk/shrink-window-char'.
-  When called with a prefix arg, resize the window by ARG lines."
+Repeatedly prompt whether to enlarge or shrink
+the window until the response is neither
+`amesk/enlarge-window-char' or `amesk/shrink-window-char'.
+When called with a prefix arg, resize the window by ARG lines."
   (interactive "p")
   (let ((prompt (format "Enlarge/Shrink window (%c/%c)? "
                         amesk/enlarge-window-char amesk/shrink-window-char))
@@ -25,6 +32,7 @@
                    (t nil))))
     (push response unread-command-events)))
 
+;;; TODO - is this better?
 ;;
 ;; Resize window (recursive-version)
 ;;
@@ -40,3 +48,5 @@
 ;;         (call-interactively 'v-resize))
 ;;      (t (push key unread-command-events))))
 ;; (global-set-key "\C-c+" 'v-resize)
+
+;;; rc-interactive-resize-window.el ends here

@@ -1,3 +1,14 @@
+;;; rc-yasnippet.el ---
+;;
+;;  Copyright (C) 2012 Transas MIP Ltd.
+;;
+;;  Personal Emacs configuration
+;;
+;;  YASnippets configuration
+;;
+;;  Author: amesk <alexei.eskenazi@transas.com>
+;;
+
 ;; (add-to-list 'load-path "~/emacs/yasnippet")
 (require 'yasnippet)
 
@@ -22,3 +33,5 @@
 ;;    ))
 
 ;;(add-hook 'after-save-hook 'amesk/update-yasnippets-on-save)
+
+;;; rc-yasnippet.el ends here

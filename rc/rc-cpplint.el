@@ -1,3 +1,14 @@
+;;; rc-cpplint.el ---
+;;
+;;  Copyright (C) 2012 Transas MIP Ltd.
+;;
+;;  Personal Emacs configuration
+;;
+;;  <Description>
+;;
+;;  Author: amesk <alexei.eskenazi@transas.com>
+;;
+
 (setq amesk/path-to-cpplint "/home/amesk/bin/cpplint")
 (setq amesk/path-to-dcpplint "/home/amesk/bin/dcpplint")
 (setq amesk/cpplint-buffer-name "*cpplint*")
@@ -31,3 +42,5 @@
    (format "%s %s" "~/bin/beautify_cpp"  buffer-file-name))
    (load-file  buffer-file-name)
    )
+
+;;; rc-cpplint.el ends here

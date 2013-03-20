@@ -1,6 +1,13 @@
-;;; starter-kit-eshell.el --- Making the defaults a bit saner
+;;; rc-eshell.el ---
 ;;
-;; Part of the Emacs Starter Kit
+;;  Copyright (C) 2012 Transas MIP Ltd.
+;;
+;;  Personal Emacs configuration
+;;
+;;  Making the defaults of eshell a bit saner
+;;
+;;  Author: amesk <alexei.eskenazi@transas.com>
+;;
 
 (setq eshell-cmpl-cycle-completions nil
       eshell-save-history-on-exit t
@@ -49,5 +56,4 @@
 ;; * extracting archives
 ;; * changing to directories
 
-(provide 'starter-kit-eshell)
-;;; starter-kit-eshell.el ends here
+;;; rc-eshell.el ends here

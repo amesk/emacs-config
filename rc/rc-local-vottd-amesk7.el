@@ -1,3 +1,14 @@
+;;; rc-local-vottd-amesk7.el ---
+;;
+;;  Copyright (C) 2012 Transas MIP Ltd.
+;;
+;;  Personal Emacs configuration
+;;
+;;  Local settings for vottd-amesk7.transas.com
+;;
+;;  Author: amesk <alexei.eskenazi@transas.com>
+;;
+
 (when (string-equal system-type "windows-nt")
 (progn
 (setq cygwin-bin "c:\\cygwin\\bin")
@@ -8,3 +19,5 @@
 (setq grep-use-null-device nil)
 (setq grep-find-use-xargs t)
 (grep-compute-defaults)
+
+;;; rc-local-vottd-amesk7.el ends here

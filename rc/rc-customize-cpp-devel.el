@@ -1,6 +1,14 @@
-;;;
-;;;
-;;;
+;;; (insert (file-name-nondirectory buffer-file-name)) ---
+;;
+;;  Copyright (C) 2012 Transas MIP Ltd.
+;;
+;;  Personal Emacs configuration
+;;
+;;  Generic C++ oriented stuff
+;;
+;;  Author: amesk <alexei.eskenazi@transas.com>
+;;
+
 
 ;; We use mostly C++, not C
 (add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
@@ -81,3 +89,5 @@ for example *.hpp <--> *.cpp."
         (message "There is no corresponding pair (header or body) file.")))
      (t
       (message "It is not a header or body file! See amesk/header-switches variable.")))))
+
+;;; rc-customize-cpp-devel.el ends here

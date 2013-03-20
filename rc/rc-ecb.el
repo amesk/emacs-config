@@ -1,3 +1,14 @@
+;;; rc-ecb.el ---
+;;
+;;  Copyright (C) 2012 Transas MIP Ltd.
+;;
+;;  Personal Emacs configuration
+;;
+;;  ECB configuration
+;;
+;;  Author: amesk <alexei.eskenazi@transas.com>
+;;
+
 (load-file "~/emacs/cedet-1.0/common/cedet.el")
 ;; (global-ede-mode 1)                      ; Enable the Project management system
 ;; (semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion
@@ -6,11 +17,11 @@
 (add-to-list 'load-path "~/emacs/ecb-2.40")
 (require 'ecb-autoloads)
 
-(defun my-ecb-activate-hook ()
+(defun amesk/ecb-activate-hook ()
   (setq ecb-tip-of-the-day nil)
   (global-semantic-tag-folding-mode))
 
-(add-hook 'ecb-activate-hook  'my-ecb-activate-hook)
+(add-hook 'ecb-activate-hook  'amesk/ecb-activate-hook)
 
 ;;;;(ede-cpp-root-project "UniNav"
 ;;;;                :name "UniNav Project"
@@ -41,6 +52,8 @@
     ((lambda () (setq amesk/is-ecb-active t) (ecb-activate)))))
 
 
-;;
+;;; TODO - use them
 ;; ecb-eshell-recenter
 ;; ecb-eshell-buffer-sync
+
+;;; rc-ecb.el ends here

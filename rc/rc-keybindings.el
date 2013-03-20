@@ -1,6 +1,13 @@
-;;; starter-kit-bindings.el --- Set up some handy key bindings
+;;; rc-keybindings.el ---
 ;;
-;; Part of the Emacs Starter Kit.
+;;  Copyright (C) 2012 Transas MIP Ltd.
+;;
+;;  Personal Emacs configuration
+;;
+;;  Set up some handy key bindings
+;;
+;;  Author: amesk <alexei.eskenazi@transas.com>
+;;
 
 ;; You know, like Readline.
 (global-set-key (kbd "C-M-h") 'backward-kill-word)
@@ -96,10 +103,6 @@
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 
-(provide 'starter-kit-bindings)
-;;; starter-kit-bindings.el ends here
-
-
 (global-set-key (kbd "C-x e") 'amesk/ecb-toggle-proc)
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 (global-set-key (kbd "C-<kp-home>") 'beginning-of-buffer)
@@ -135,3 +138,5 @@
 (global-set-key (kbd "C-c f F") '(lambda () (interactive)(flymake-mode -1)))
 (global-set-key (kbd "C-c f e") 'flymake-display-err-menu-for-current-line)
 (global-set-key (kbd "C-c f g") 'flymake-goto-next-error)
+
+;;; rc-keybindings.el ends here

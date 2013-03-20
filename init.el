@@ -1,13 +1,20 @@
-;;; init.el --- Where all the magic begins
+;;; init.el ---
 ;;
-;; Part of the Emacs Starter Kit
+;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
-;; This is the first thing to get loaded.
+;;  Personal Emacs configuration
 ;;
-;; "Emacs outshines all other editing software in approximately the
-;; same way that the noonday sun does the stars. It is not just bigger
-;; and brighter; it simply makes everything else vanish."
-;; -Neal Stephenson, "In the Beginning was the Command Line"
+;;  This is the first thing to get loaded.
+;;
+;;  "Emacs outshines all other editing software in approximately the
+;;  same way that the noonday sun does the stars. It is not just bigger
+;;  and brighter; it simply makes everything else vanish."
+;;  -Neal Stephenson, "In the Beginning was the Command Line"
+;;
+;;  Author: amesk <alexei.eskenazi@transas.com>
+;;
+
+;;; Where all the magic begins
 
 ;; Turn off mouse interface early in startup to avoid momentary display
 ;; You really don't need these; trust me.

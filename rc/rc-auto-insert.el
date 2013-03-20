@@ -1,4 +1,13 @@
-;; auto-insert stuff
+;;; rc-auto-insert.el ---
+;;
+;;  Copyright (C) 2012 Transas MIP Ltd.
+;;
+;;  Personal Emacs configuration
+;;
+;;  auto-insert stuff
+;;
+;;  Author: amesk <alexei.eskenazi@transas.com>
+;;
 
 (add-hook 'find-file-hooks 'auto-insert)
 (setq auto-insert-directory (concat amesk/config-base "auto-insert/"))
@@ -28,6 +37,8 @@
            (setq name (replace-match "_" t t name)))
          (concat name "_"))
        (concat (upcase (file-name-nondirectory (file-name-sans-extension hdr-name))) "_H_"))))
+
+;; TODO - find uninav in more intelligent way
 
 (defun amesk/auto-replace-header-name ()
 (let ((name (amesk/compute-header-guard buffer-file-name)))
@@ -99,4 +110,4 @@
   (amesk/auto-replace-date-time)
   )
 
-;;; emacs-rc-auto-insert.el ends here
+;;; rc-auto-insert.el ends here

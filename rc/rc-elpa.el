@@ -1,6 +1,13 @@
-;;; starter-kit-elpa.el --- Install a base set of packages automatically.
+;;; rc-elpa.el ---
 ;;
-;; Part of the Emacs Starter Kit
+;;  Copyright (C) 2012 Transas MIP Ltd.
+;;
+;;  Personal Emacs configuration
+;;
+;;  Install a base set of packages automatically.
+;;
+;;  Author: amesk <alexei.eskenazi@transas.com>
+;;
 
 (require 'cl)
 
@@ -11,15 +18,6 @@
   (add-to-list 'package-archives source t))
 (package-initialize)
 
-
-;; (defvar starter-kit-packages (list 'idle-highlight-mode
-;;                                    'ruby-mode
-;;                                    'inf-ruby
-;;                                    'css-mode
-;;                                    'yaml-mode
-;;                                    'find-file-in-project
-;;                                    'magit
-;;                                   'gist)
 (defvar starter-kit-packages (list 'idle-highlight-mode
                                    'css-mode
                                    'yaml-mode
@@ -28,7 +26,6 @@
                                    'lorem-ipsum
                                    'yasnippet
                                    'magit)
-
   "Libraries that should be installed by default.")
 
 (defun starter-kit-elpa-install ()
@@ -83,5 +80,4 @@ just have to assume it's online."
 
 (regen-autoloads)
 
-;; (provide 'starter-kit-elpa)
-(provide 'emacs-rc-elpa)
+;;; rc-elpa.elnil ends here

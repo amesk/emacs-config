@@ -1,3 +1,13 @@
+;;; rc-org-mode.el ---
+;;
+;;  Copyright (C) 2012 Transas MIP Ltd.
+;;
+;;  Personal Emacs configuration
+;;
+;;  Org-mode configuration
+;;
+;;  Author: amesk <alexei.eskenazi@transas.com>
+;;
 
 ;; (global-set-key "\e\el" 'org-store-link)
 ;; (global-set-key "\e\ec" 'org-capture)
@@ -33,3 +43,5 @@
 ;;                  ("Kernel" . ?k)
 ;;                  ("Infrastructure" . ?i)
 ;;                  ("Charts" . ?c)))
+
+;;; rc-org-mode.el ends here

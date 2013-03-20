@@ -1,3 +1,14 @@
+;;; rc-maxframe.el ---
+;;
+;;  Copyright (C) 2012 Transas MIP Ltd.
+;;
+;;  Personal Emacs configuration
+;;
+;;  Maximize window on start
+;;
+;;  Author: amesk <alexei.eskenazi@transas.com>
+;;
+
 (require 'maxframe)
 
 (defun amesk/try-maximize ()
@@ -7,3 +18,5 @@
       (maximize-frame))))
 
 (add-hook 'window-setup-hook 'amesk/try-maximize)
+
+;;; rc-maxframe.el ends here

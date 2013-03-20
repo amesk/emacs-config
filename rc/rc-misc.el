@@ -1,3 +1,14 @@
+;;; rc-misc.el ---
+;;
+;;  Copyright (C) 2012 Transas MIP Ltd.
+;;
+;;  Personal Emacs configuration
+;;
+;;  Different stuff
+;;
+;;  Author: amesk <alexei.eskenazi@transas.com>
+;;
+
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
   (tooltip-mode -1)
@@ -131,5 +142,4 @@
 ;; (setq initial-scratch-message
 ;;              (format-time-string "%Y-%m-%d at %T")))
 
-(provide 'starter-kit-misc)
-;;; starter-kit-misc.el ends here
+;;; rc-misc.el ends here

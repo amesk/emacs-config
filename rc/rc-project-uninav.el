@@ -1,18 +1,19 @@
-;;; rc-uninav.el ---
+;;; rc-project-uninav.el ---
 ;;
 ;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
-;;  <Project>
+;;  Personal Emacs configuration
 ;;
-;;  <Description>
+;;  UniNav project configuration
 ;;
 ;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;
 
 (require 'flymake)
 
-;; require doesn't handle the job!
-;; (require 'eproject)
+;; require doesn't handle the job, otherwize define-project-type is
+;; not available!
+(require 'eproject)
 (load-file (concat dotfiles-dir "plugins/eproject.el"))
 
 (setq cpplint-abspath "/home/amesk/projects/uninav/uninav/tools/cpplint.py")
@@ -34,7 +35,6 @@
             (when (and (buffer-file-name)
                        (not eproject-root))
               (eproject-maybe-turn-on))))
-
 
 (add-hook 'uninav-project-file-visit-hook
       (lambda ()
@@ -59,4 +59,4 @@
 ;; (push '(".+\\.h$" flymake-c-init) flymake-allowed-file-name-masks)
 
 
-;;; rc-uninav.el ends here
+;;; rc-project-uninav.el ends here

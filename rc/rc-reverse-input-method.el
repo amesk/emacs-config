@@ -1,5 +1,12 @@
+;;; rc-reverse-input-method.el ---
 ;;
-;; Commands problem solving in russian mode (turned on from the system)
+;;  Copyright (C) 2012 Transas MIP Ltd.
+;;
+;;  Personal Emacs configuration
+;;
+;;  Commands problem solving in russian mode (turned on from the system)
+;;
+;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;
 
 (defun amesk/reverse-input-method (input-method)
@@ -31,3 +38,5 @@
     ad-do-it))
 
 (amesk/reverse-input-method 'russian-computer)
+
+;;; rc-reverse-input-method.el ends here

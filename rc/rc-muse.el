@@ -1,3 +1,14 @@
+;;; rc-muse.el ---
+;;
+;;  Copyright (C) 2012 Transas MIP Ltd.
+;;
+;;  Personal Emacs configuration
+;;
+;;  Emacs Muse configuration
+;;
+;;  Author: amesk <alexei.eskenazi@transas.com>
+;;
+
 ;; Determine projects location
 
 (cond
@@ -199,3 +210,5 @@
 ;;   (require 'muse-http)
 ;;   ;;(add-hook 'after-init-hook 'httpd-start)
 ;;   (setq httpd-document-root (expand-file-name "~/projects/uninav-page-muse")))
+
+;;; rc-muse.el ends here

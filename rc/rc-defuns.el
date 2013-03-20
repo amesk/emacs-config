@@ -1,6 +1,13 @@
-;;; starter-kit-defuns.el --- Define some custom functions
+;;; rc-defuns.el ---
 ;;
-;; Part of the Emacs Starter Kit
+;;  Copyright (C) 2012 Transas MIP Ltd.
+;;
+;;  Personal Emacs configuration
+;;
+;;  Define some custom functions
+;;
+;;  Author: amesk <alexei.eskenazi@transas.com>
+;;
 
 (require 'thingatpt)
 (require 'imenu)
@@ -226,4 +233,4 @@ next non-whitespace character"
 
 (provide 'starter-kit-defuns)
 
-;;; starter-kit-defuns.el ends here
+;;; rc-defuns.el ends here
