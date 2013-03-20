@@ -1,10 +1,12 @@
-;;; rc-eshell.el ---
+;;; -*- Mode: Emacs-Lisp -*-
 ;;
 ;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
 ;;  Personal Emacs configuration
 ;;
 ;;  Making the defaults of eshell a bit saner
+;;
+;;  File: rc-eshell.el
 ;;
 ;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;

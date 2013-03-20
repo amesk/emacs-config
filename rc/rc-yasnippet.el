@@ -1,10 +1,12 @@
-;;; rc-yasnippet.el ---
+;;; -*- Mode: Emacs-Lisp -*-
 ;;
 ;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
 ;;  Personal Emacs configuration
 ;;
 ;;  YASnippets configuration
+;;
+;;  File: rc-yasnippet.el
 ;;
 ;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;

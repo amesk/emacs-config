@@ -1,10 +1,12 @@
-;;; rc-cpplint.el ---
+;;; -*- Mode: Emacs-Lisp -*-
 ;;
 ;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
 ;;  Personal Emacs configuration
 ;;
 ;;  <Description>
+;;
+;;  File:  rc-cpplint.el
 ;;
 ;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;

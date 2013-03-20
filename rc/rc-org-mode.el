@@ -1,10 +1,12 @@
-;;; rc-org-mode.el ---
+;;; -*- Mode: Emacs-Lisp -*-
 ;;
 ;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
 ;;  Personal Emacs configuration
 ;;
 ;;  Org-mode configuration
+;;
+;;  File: rc-org-mode.el
 ;;
 ;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;

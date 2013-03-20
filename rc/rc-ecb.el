@@ -1,10 +1,12 @@
-;;; rc-ecb.el ---
+;;; -*- Mode: Emacs-Lisp -*-
 ;;
 ;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
 ;;  Personal Emacs configuration
 ;;
 ;;  ECB configuration
+;;
+;;  File: rc-ecb.el
 ;;
 ;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;

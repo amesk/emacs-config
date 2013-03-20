@@ -1,10 +1,12 @@
-;;; rc-local-vottd-amesk7.el ---
+;;; -*- Mode: Emacs-Lisp -*-
 ;;
 ;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
 ;;  Personal Emacs configuration
 ;;
 ;;  Local settings for vottd-amesk7.transas.com
+;;
+;;  File: rc-local-vottd-amesk7.el
 ;;
 ;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;

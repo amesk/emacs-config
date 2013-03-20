@@ -1,10 +1,12 @@
-;;; rc-misc.el ---
+;;; -*- Mode: Emacs-Lisp -*-
 ;;
 ;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
 ;;  Personal Emacs configuration
 ;;
 ;;  Different stuff
+;;
+;;  File: rc-misc.el
 ;;
 ;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;

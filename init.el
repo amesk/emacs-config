@@ -1,4 +1,4 @@
-;;; init.el ---
+;;; -*- Mode: Emacs-Lisp -*-
 ;;
 ;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
@@ -10,6 +10,8 @@
 ;;  same way that the noonday sun does the stars. It is not just bigger
 ;;  and brighter; it simply makes everything else vanish."
 ;;  -Neal Stephenson, "In the Beginning was the Command Line"
+;;
+;;  File: init.el
 ;;
 ;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;
@@ -73,7 +75,6 @@
                     "rc-keybindings.el"))
 
 (dolist (m rc-list) (load-file (concat amesk/rc-files-base m)))
-
 
 (if (fboundp 'amesk/get-short-hostname)
     (let* ((fname (concat amesk/rc-files-base "rc-local-" (amesk/get-short-hostname) ".el")))

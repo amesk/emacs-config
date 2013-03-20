@@ -1,10 +1,12 @@
-;;; (insert (file-name-nondirectory buffer-file-name)) ---
+;;; -*- Mode: Emacs-Lisp -*-
 ;;
 ;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
 ;;  Personal Emacs configuration
 ;;
 ;;  Generic C++ oriented stuff
+;;
+;;  File: rc-customize-cpp-devel.el
 ;;
 ;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;

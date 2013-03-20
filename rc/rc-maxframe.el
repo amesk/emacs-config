@@ -1,10 +1,12 @@
-;;; rc-maxframe.el ---
+;;; -*- Mode: Emacs-Lisp -*-
 ;;
 ;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
 ;;  Personal Emacs configuration
 ;;
 ;;  Maximize window on start
+;;
+;;  File: rc-maxframe.el
 ;;
 ;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;

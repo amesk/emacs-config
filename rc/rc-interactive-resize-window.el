@@ -1,10 +1,12 @@
-;;; rc-interactive-resize-window.el ---
+;;; -*- Mode: Emacs-Lisp -*-
 ;;
 ;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
 ;;  Personal Emacs configuration
 ;;
 ;;  Resize window interactively
+;;
+;;  File: rc-interactive-resize-window.el
 ;;
 ;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;

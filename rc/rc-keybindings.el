@@ -1,10 +1,12 @@
-;;; rc-keybindings.el ---
+;;; -*- Mode: Emacs-Lisp -*-
 ;;
 ;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
 ;;  Personal Emacs configuration
 ;;
 ;;  Set up some handy key bindings
+;;
+;;  File: rc-keybindings.el
 ;;
 ;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;

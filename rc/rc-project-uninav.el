@@ -1,10 +1,12 @@
-;;; rc-project-uninav.el ---
+;;; -*- Mode: Emacs-Lisp -*-
 ;;
 ;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
 ;;  Personal Emacs configuration
 ;;
 ;;  UniNav project configuration
+;;
+;;  File: rc-project-uninav.el
 ;;
 ;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;

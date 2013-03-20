@@ -1,10 +1,12 @@
-;;; rc-reverse-input-method.el ---
+;;; -*- Mode: Emacs-Lisp -*-
 ;;
 ;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
 ;;  Personal Emacs configuration
 ;;
 ;;  Commands problem solving in russian mode (turned on from the system)
+;;
+;;  File: rc-reverse-input-method.el
 ;;
 ;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;

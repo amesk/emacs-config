@@ -1,10 +1,12 @@
-;;; rc-auto-insert.el ---
+;;; -*- Mode: Emacs-Lisp -*-
 ;;
 ;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
 ;;  Personal Emacs configuration
 ;;
 ;;  auto-insert stuff
+;;
+;;  File: rc-auto-insert.el
 ;;
 ;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;

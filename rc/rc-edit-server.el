@@ -1,10 +1,12 @@
-;;; rc-edit-server.el ---
+;;; -*- Mode: Emacs-Lisp -*-
 ;;
 ;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
 ;;  Personal Emacs configuration
 ;;
 ;;  Emacs Edit server configuration
+;;
+;;  File: rc-edit-server.el
 ;;
 ;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;

@@ -1,10 +1,12 @@
-;;; rc-elpa.el ---
+;;; -*- Mode: Emacs-Lisp -*-
 ;;
 ;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
 ;;  Personal Emacs configuration
 ;;
 ;;  Install a base set of packages automatically.
+;;
+;;  File: rc-elpa.el
 ;;
 ;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;

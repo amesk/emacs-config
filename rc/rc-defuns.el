@@ -1,10 +1,12 @@
-;;; rc-defuns.el ---
+;;; -*- Mode: Emacs-Lisp -*-
 ;;
 ;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
 ;;  Personal Emacs configuration
 ;;
 ;;  Define some custom functions
+;;
+;;  File: rc-defuns.el
 ;;
 ;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;

@@ -1,10 +1,12 @@
-;;; rc-registers.el ---
+;;; -*- Mode: Emacs-Lisp -*-
 ;;
 ;;  Copyright (C) 2012 Transas MIP Ltd.
 ;;
 ;;  Personal Emacs configuration
 ;;
 ;;  Shortcuts to some buffers
+;;
+;;  File: rc-registers.el
 ;;
 ;;  Author: amesk <alexei.eskenazi@transas.com>
 ;;
