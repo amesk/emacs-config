@@ -70,6 +70,7 @@
                     "rc-edit-server.el"
                     "rc-registers.el"
                     "rc-org-mode.el"
+                    "rc-ispell.el"
                     "rc-misc.el"
                     "rc-project-uninav.el"
                     "rc-keybindings.el"))
