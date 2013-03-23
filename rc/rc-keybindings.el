@@ -110,7 +110,6 @@
 (global-set-key (kbd "C-<kp-home>") 'beginning-of-buffer)
 (global-set-key (kbd "C-<kp-end>") 'end-of-buffer)
 (global-set-key [(C tab)] 'buffer-menu)
-(global-set-key (kbd "C-x w") 'amesk/resize-window)
 (global-set-key (kbd "M-g") 'goto-line)
 (global-set-key (kbd "C-x C-g") 'amesk/cpplint)
 (global-set-key (kbd "C-x M-g") 'amesk/dcpplint)
@@ -140,5 +139,12 @@
 (global-set-key (kbd "C-c f F") '(lambda () (interactive)(flymake-mode -1)))
 (global-set-key (kbd "C-c f e") 'flymake-display-err-menu-for-current-line)
 (global-set-key (kbd "C-c f g") 'flymake-goto-next-error)
+
+;; rc-win-resize.el keybindings
+
+(global-set-key [C-S-up] 'amesk/win-resize-enlarge-horiz)
+(global-set-key [C-S-down] 'amesk/win-resize-minimize-horiz)
+(global-set-key [C-S-left] 'amesk/win-resize-enlarge-vert)
+(global-set-key [C-S-right] 'amesk/win-resize-minimize-vert)
 
 ;;; rc-keybindings.el ends here

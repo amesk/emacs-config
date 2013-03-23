@@ -62,7 +62,6 @@
                     "rc-cpplint.el"
                     "rc-yasnippet.el"
                     "rc-auto-insert.el"
-                    "rc-interactive-resize-window.el"
                     "rc-reverse-input-method.el"
                     "rc-customize-cpp-devel.el"
                     "rc-muse.el"
@@ -73,6 +72,7 @@
                     "rc-ispell.el"
                     "rc-misc.el"
                     "rc-project-uninav.el"
+                    "rc-win-resize.el"
                     "rc-keybindings.el"))
 
 (dolist (m rc-list) (load-file (concat amesk/rc-files-base m)))

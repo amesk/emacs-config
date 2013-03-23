@@ -27,6 +27,7 @@
                                    'find-file-in-project
                                    'lorem-ipsum
                                    'yasnippet
+                                   'dedicated
                                    'magit)
   "Libraries that should be installed by default.")
 
