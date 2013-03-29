@@ -224,15 +224,6 @@ Typical usage:
         ;; Restore hack side effect
         (setq buffer-file-name nil)))))
 
-
-(defun kill-forward-whitespace ()
-"Kill the whitespace from the current position until the
-next non-whitespace character"
-  (interactive)
-  (let ((start-point (point))
-        (end (skip-chars-forward " \t\n\r")))
-    (kill-region start-point (+ end start-point))))
-
 (provide 'starter-kit-defuns)
 
 ;;; rc-defuns.el ends here
