@@ -48,9 +48,9 @@
              (list '(".+\\.cpp$" flymake-cpplint-init)
                    '(".+\\.h$" flymake-cpplint-init)))
         (save-excursion
-          (unless (search-forward "Soloviev" nil t)
+          (when (and (not (search-forward "Soloviev" nil t))
+                     (string-match "\\.\\(h\\|cpp\\)$" (buffer-name)))
             (flymake-mode t)))))
-
 
 ;; (global-set-key [f3] 'flymake-display-err-menu-for-current-line)
 ;; (global-set-key [f4] 'flymake-goto-next-error)
