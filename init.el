@@ -73,6 +73,7 @@
                     "rc-misc.el"
                     "rc-project-uninav.el"
                     "rc-win-resize.el"
+                    "rc-doxymacs.el"
                     "rc-keybindings.el"))
 
 (dolist (m rc-list) (load-file (concat amesk/rc-files-base m)))

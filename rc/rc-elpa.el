@@ -28,6 +28,7 @@
                                    'lorem-ipsum
                                    'yasnippet
                                    'dedicated
+                                   'w3
                                    'magit)
   "Libraries that should be installed by default.")
 
