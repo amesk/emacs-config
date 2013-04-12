@@ -224,6 +224,14 @@ Typical usage:
         ;; Restore hack side effect
         (setq buffer-file-name nil)))))
 
+
+(defun amesk/eshell-clear ()
+  "Clear the eshell buffer."
+  (interactive)
+  (let ((inhibit-read-only t))
+    (erase-buffer))
+  (eshell-send-input))
+
 (provide 'starter-kit-defuns)
 
 ;;; rc-defuns.el ends here

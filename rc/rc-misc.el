@@ -136,9 +136,9 @@
 ;; Amesk patches
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (setq column-number-mode t)
-;; compile window splits always vertically
-(setq split-height-threshold 0)
-(setq split-width-threshold nil)
+;;; compile window splits always vertically
+;; (setq split-height-threshold 0)
+;; (setq split-width-threshold nil)
 
 ;;; put something different in the scratch buffer
 ;; (setq initial-scratch-message

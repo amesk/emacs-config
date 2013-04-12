@@ -67,4 +67,6 @@
 
 (add-hook 'c-mode-common-hook 'doxymacs-mode)
 
+(add-to-list 'auto-mode-alist '("\\.dox$" . c++-mode))
+
 ;;; rc-doxymacs.el ends here

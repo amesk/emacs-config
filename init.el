@@ -86,3 +86,4 @@
 (load custom-file 'noerror)
 
 ;;; init.el ends here
+(put 'erase-buffer 'disabled nil)
