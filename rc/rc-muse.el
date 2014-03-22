@@ -18,6 +18,8 @@
     (setq amesk-projects-base "~/projects/"))
  ((equal (amesk/get-short-hostname) "amesker-5935")
     (setq amesk-projects-base "~/projects/"))
+ ((equal (amesk/get-short-hostname) "vottl-amesku")
+    (setq amesk-projects-base "~/projects/"))
  ((equal (amesk/get-short-hostname) "VOTTD-AMESK7")
     (setq amesk-projects-base "E:/Projects/"))
  (t (amesk-projects-base "undefined")))
