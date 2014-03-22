@@ -53,6 +53,9 @@
       ((lambda () (setq amesk/is-ecb-active nil) (ecb-deactivate)))
     ((lambda () (setq amesk/is-ecb-active t) (ecb-activate)))))
 
+;; Change that annoying pink background for dark color themes ;-)
+(require 'ecb-face)
+(set-face-background 'ecb-default-highlight-face '"black")
 
 ;;; TODO - use them
 ;; ecb-eshell-recenter
