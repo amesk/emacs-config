@@ -134,7 +134,22 @@
 ;; rc-uninav.el keybindings
 
 (global-set-key (kbd "<f7>") 'recompile)
-(global-set-key (kbd "<f5>") (lambda () (interactive)(shell-command "cd ~/projects/uninav/out/bin && ./plotter&")))
+(global-set-key (kbd "C-<f5>") (lambda () (interactive)(shell-command "cd ~/projects/uninav/out/bin && ./plotter&")))
+;; (global-set-key (kbd "<f5>")
+;;                 (lambda ()(interactive)
+;;                   (setq gdb-many-windows t)
+;;                   (ecb-deactivate)
+;;                   (setq amesk/is-ecb-active nil)
+;;                   (gdb-restore-windows)
+;;                   (gdb "/home/amesk/projects/uninav/out/bin/plotter")))
+
+(global-set-key (kbd "<f5>")
+                (lambda ()(interactive)
+                  (setq gdb-many-windows t)
+                  (when amesk/is-ecb-active
+                    (amesk/ecb-toggle-proc))
+                  (gdb "gdb --annotate=3 /home/amesk/projects/uninav/out/bin/plotter")))
+
 (global-set-key (kbd "C-c f f") '(lambda () (interactive)(flymake-mode 1)))
 (global-set-key (kbd "C-c f F") '(lambda () (interactive)(flymake-mode -1)))
 (global-set-key (kbd "C-c f e") 'flymake-display-err-menu-for-current-line)

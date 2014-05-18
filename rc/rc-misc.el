@@ -145,3 +145,5 @@
 ;;              (format-time-string "%Y-%m-%d at %T")))
 
 ;;; rc-misc.el ends here
+
+(setq gdb-many-windows t)
