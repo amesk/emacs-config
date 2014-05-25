@@ -18,7 +18,7 @@
 (global-set-key (kbd "C-x \\") 'align-regexp)
 
 ;; Completion that uses many different methods to find options.
-(global-set-key (kbd "M-/") 'hippie-expand)
+;; (global-set-key (kbd "M-/") 'hippie-expand)
 
 ;; Perform general cleanup.
 (global-set-key (kbd "C-c n") 'cleanup-buffer)
@@ -101,10 +101,6 @@
     (let ((case-fold-search isearch-case-fold-search))
       (occur (if isearch-regexp isearch-string (regexp-quote isearch-string))))))
 
-;; Org
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
-
 (global-set-key (kbd "C-x e") 'amesk/ecb-toggle-proc)
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 (global-set-key (kbd "C-<kp-home>") 'beginning-of-buffer)
@@ -116,6 +112,7 @@
 (global-set-key "\C-x2" (lambda () (interactive)(split-window-vertically) (other-window 1)))
 (global-set-key "\C-x3" (lambda () (interactive)(split-window-horizontally) (other-window 1)))
 (global-set-key "\C-x\M-t" 'text-translator)
+(global-set-key (kbd "C-x t") 'amesk/tag-word-or-region)
 
 (global-set-key (kbd "C-x b") 'amesk/switch-to-buffer-wrap)
 
@@ -129,20 +126,14 @@
 (add-hook 'org-load-hook
             (lambda ()
               (define-key org-mode-map "\C-n" 'org-next-link)
-              (define-key org-mode-map "\C-p" 'org-previous-link)))
+              (define-key org-mode-map "\C-p" 'org-previous-link)
+              (define-key org-mode-map "\C-cl" 'org-store-link)
+              (define-key org-mode-map "\C-ca" 'org-agenda)))
 
-;; rc-uninav.el keybindings
+;; UniNav specific keybindings
 
 (global-set-key (kbd "<f7>") 'recompile)
 (global-set-key (kbd "C-<f5>") (lambda () (interactive)(shell-command "cd ~/projects/uninav/out/bin && ./plotter&")))
-;; (global-set-key (kbd "<f5>")
-;;                 (lambda ()(interactive)
-;;                   (setq gdb-many-windows t)
-;;                   (ecb-deactivate)
-;;                   (setq amesk/is-ecb-active nil)
-;;                   (gdb-restore-windows)
-;;                   (gdb "/home/amesk/projects/uninav/out/bin/plotter")))
-
 (global-set-key (kbd "<f5>")
                 (lambda ()(interactive)
                   (setq gdb-many-windows t)
@@ -150,12 +141,14 @@
                     (amesk/ecb-toggle-proc))
                   (gdb "gdb --annotate=3 /home/amesk/projects/uninav/out/bin/plotter")))
 
+;; Flymake keybindings
+                  
 (global-set-key (kbd "C-c f f") '(lambda () (interactive)(flymake-mode 1)))
 (global-set-key (kbd "C-c f F") '(lambda () (interactive)(flymake-mode -1)))
 (global-set-key (kbd "C-c f e") 'flymake-display-err-menu-for-current-line)
 (global-set-key (kbd "C-c f g") 'flymake-goto-next-error)
 
-;; rc-win-resize.el keybindings
+;; Window resizing
 
 (global-set-key [C-S-up] 'amesk/win-resize-enlarge-horiz)
 (global-set-key [C-S-down] 'amesk/win-resize-minimize-horiz)
