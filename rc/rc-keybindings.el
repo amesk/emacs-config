@@ -142,7 +142,7 @@
                   (gdb "gdb --annotate=3 /home/amesk/projects/uninav/out/bin/plotter")))
 
 ;; Flymake keybindings
-                  
+
 (global-set-key (kbd "C-c f f") '(lambda () (interactive)(flymake-mode 1)))
 (global-set-key (kbd "C-c f F") '(lambda () (interactive)(flymake-mode -1)))
 (global-set-key (kbd "C-c f e") 'flymake-display-err-menu-for-current-line)
@@ -154,5 +154,17 @@
 (global-set-key [C-S-down] 'amesk/win-resize-minimize-horiz)
 (global-set-key [C-S-left] 'amesk/win-resize-enlarge-vert)
 (global-set-key [C-S-right] 'amesk/win-resize-minimize-vert)
+
+;; Eshell clear buffer Ctrl+L
+
+(defun eshell-clear-buffer ()
+  "Clear terminal"
+  (interactive)
+  (let ((inhibit-read-only t))
+    (erase-buffer)
+    (eshell-send-input)))
+(add-hook 'eshell-mode-hook
+      '(lambda()
+          (local-set-key (kbd "C-l") 'eshell-clear-buffer)))
 
 ;;; rc-keybindings.el ends here
